@@ -50,7 +50,7 @@ function SendOTPForm({ mobile, setMobile, setStep, setIsOpen }) {
   };
   if (!isClient) return null;
   return (
-    <div className="relative flex h-[362px] w-[561px] flex-col rounded-[20px] bg-white p-10 pt-[60px] shadow-[0_4px_4px_-0px_rgba(0,0,0,0.25)]">
+    <div className="relative flex min-w-[358px] flex-col rounded-[20px] bg-white p-10 pt-[60px] shadow-[0_4px_4px_-0px_rgba(0,0,0,0.25)] lg:min-w-[450px]">
       <div onClick={closeHandler} className="absolute right-5 top-5">
         <img
           className="size-6"
@@ -59,7 +59,7 @@ function SendOTPForm({ mobile, setMobile, setStep, setIsOpen }) {
         />
       </div>
 
-      <h4 className="text-center font-VazirLight text-[28px] font-semibold text-myGray-410">
+      <h4 className="mb-9 text-center font-VazirLight text-[28px] font-semibold text-myGray-410">
         ورود به تورینو
       </h4>
       <form
@@ -72,7 +72,7 @@ function SendOTPForm({ mobile, setMobile, setStep, setIsOpen }) {
         <input
           type="text"
           placeholder="09123456789"
-          className="ltr mb-10 rounded-md border border-[#00000037] px-2 py-[15px] text-right font-VazirDigitRegular placeholder:leading-6"
+          className="ltr mb-10 rounded-md border border-[#00000037] px-2 py-[15px] text-right font-VazirDigitThin placeholder:leading-6"
           value={mobile}
           onChange={(e) => setMobile(e.target.value)}
         />

@@ -1,30 +1,15 @@
 "use client";
 
-import UserInfoForm from "@/components/templates/checkout/UserInfoForm";
-import { usePutUserData } from "@/core/services/mutations";
+import UserAccountForm from "@/components/templates/profile/UserAccountForm";
 import { useGetUserProfile } from "@/core/services/queries";
 import Image from "next/image";
-import { useState } from "react";
 
 export default function UserAccountPage() {
   const { data } = useGetUserProfile();
-  console.log(data);
 
   return (
     <>
-      <div>
-        <span>اطلاعات کاربری</span>
-        <div>
-          <div className="flex w-full justify-between">
-            <span>شماره موبایل</span>
-            <span>{data?.data?.mobile}</span>
-          </div>
-          <div>
-            <input type="email" />
-            <input type="submit" />
-          </div>
-        </div>
-      </div>
+      <UserAccountForm data={data} />
 
       <section>
         <div>

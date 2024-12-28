@@ -1,9 +1,10 @@
 "use client";
-import { getUserTransactions } from "@/core/services/queries";
+
+import { useGetUserTransactions } from "@/core/services/queries";
 import { separate } from "@/core/utils/helper/detailsFormatter";
 
 export default function UserTransactions() {
-  const { data, isPending, isError } = getUserTransactions();
+  const { data, isPending, isError } = useGetUserTransactions();
 
   const timeFormatter = (time) => {
     const formatter = new Intl.DateTimeFormat("fa-IR", {

@@ -16,5 +16,8 @@ const personalInfo = object({
   birthDate: string().required("تاریخ تولد خود را وارد کنید!"),
   gender: string().required("جنسیت خود را مشخص کنید!"),
 });
+const email = object({
+  email: string().required().min(10),
+});
 
-export { bankAcountSchema, personalInfo };
+export { bankAcountSchema, personalInfo, email };

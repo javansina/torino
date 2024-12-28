@@ -1,89 +1,22 @@
 "use client";
 import Image from "next/image";
 import { Controller, useForm } from "react-hook-form";
-import { Calendar, CalendarProvider, DatePicker } from "zaman";
+import { DatePicker } from "zaman";
 
 import queryString from "query-string";
-import { useGetTours } from "@/core/services/queries";
+
 import { flattenObject } from "@/core/utils/helper/helper";
 
 import { useRouter } from "next/navigation";
 import useQuery from "@/core/hooks/query";
-import {
-  dateToIso,
-  formatDate,
-  monthNomToFa,
-} from "@/core/utils/helper/detailsFormatter";
+import { dateToIso } from "@/core/utils/helper/detailsFormatter";
 import { useEffect, useState } from "react";
 import OutsideClickHandler from "@/core/utils/helper/OutsideClickHandler";
-// export function SearchFrom() {
-//   const [query, setQuery] = useState("");
 
-//   const router = useRouter();
-//   const { getQuery } = useQuery();
-//   const { data, isPending, refetch } = useGetTours(query);
-//   const { register, handleSubmit, control, reset } = useForm();
-
-//   // useEffect(() => {
-//   //   refetch();
-//   // }, [query]);
-
-//   useEffect(() => {
-//     const originId = getQuery("originId");
-//     const destinationId = getQuery("destinationId");
-//     if (originId && destinationId) reset({ originId, destinationId });
-//     // console.log({ originId, destinationId });
-//   }, []);
-
-//   const submitHandler = (form) => {
-//     // setQuery(flattenObject(form));
-//     const query = queryString.stringify(flattenObject(form));
-//     router.push(`/?${query}`);
-//   };
-
-//   return (
-//     <form
-//       className="m-auto flex w-fit gap-5 bg-green-100 p-5"
-//       onSubmit={handleSubmit(submitHandler)}
-//     >
-//       <select {...register("originId")}>
-//         <option value="1">تهران</option>
-//         <option value="2">سنندج</option>
-//       </select>
-//       <select {...register("destinationId")}>
-//         <option value="1">تهران</option>
-//         <option value="2">سنندج</option>
-//       </select>
-//       <Controller
-//         control={control}
-//         name="date"
-//         render={({ field: { onChange } }) => (
-//           <DatePicker
-//             round="x2"
-//             accentColor="#28A745"
-//             onChange={(e) =>
-//               onChange({
-//                 startDate: dateToIso(e.from),
-//                 endDate: dateToIso(e.to),
-//               })
-//             }
-//             range
-//           />
-//         )}
-//       />
-//       <input
-//         type="submit"
-//         className="!border-0 !bg-green-500 p-2 text-xs text-white"
-//       />
-//     </form>
-//   );
-// }
 export default function SearchFrom() {
-  const [query, setQuery] = useState("");
-
   const router = useRouter();
   const { getQuery } = useQuery();
-  // const { data, isPending, refetch } = useGetTours(query);
+
   const { register, handleSubmit, control, reset, setValue } = useForm();
 
   const [originDropDown, setOriginDropDown] = useState(false);
@@ -91,7 +24,6 @@ export default function SearchFrom() {
   const [isSelecting, setIsSelecting] = useState(false);
 
   const [origin, setOrigin] = useState("مبدا");
-  const [date, setDate] = useState("تاریخ");
 
   const [destination, setDestination] = useState("مقصد");
 
@@ -108,7 +40,6 @@ export default function SearchFrom() {
   }, []);
 
   const submitHandler = (form) => {
-    console.log(form);
     const { originId, destinationId, date } = form;
 
     if (form.date === "تاریخ") {
@@ -128,9 +59,6 @@ export default function SearchFrom() {
       const d = destinationCity.find((i) => i.destination === destinationId);
       form.destinationId = d.id;
     }
-
-    console.log(form);
-    // f = {};
 
     const query = queryString.stringify(flattenObject(form));
     router.push(`/?${query}`);

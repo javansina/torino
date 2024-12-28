@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import api from "../config/api";
+import api from "../../app/api/api";
 import queryString from "query-string";
 const useGetTours = (query) => {
   const url = "tour?" + queryString.stringify(query);
@@ -55,7 +55,7 @@ const GetTours = (destinationId, originId, startDate, endDate) => {
   return useQuery({ queryFn, queryKey });
 };
 
-const getUserTransactions = () => {
+const useGetUserTransactions = () => {
   const queryFn = () => api.get(`user/transactions`);
   const queryKey = ["user-transactions"];
   return useQuery({ queryFn, queryKey });
@@ -69,5 +69,5 @@ export {
   useGetUserBasket,
   useGetUserTours,
   useGetTours,
-  getUserTransactions,
+  useGetUserTransactions,
 };

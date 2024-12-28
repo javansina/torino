@@ -5,7 +5,8 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const serverFetch = async (
   endpoint,
   query,
-  cache = { cache: "force-cache" },
+  cache = "force-cache",
+  token = null,
 ) => {
   let url = BASE_URL;
   if (endpoint) url += endpoint;
@@ -14,9 +15,14 @@ const serverFetch = async (
   console.log(url);
 
   try {
-    const res = await fetch(`${url}`, cache);
+    const res = await fetch(`${url}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Cache-Control": cache,
+      },
+    });
     const json = await res.json();
-    console.log(json);
+    console.log("data", json);
 
     return json;
   } catch (error) {

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import api from "../config/api";
+import api from "../../app/api/api";
 import toast from "react-hot-toast";
 import { setCookie } from "../utils/cookie";
 

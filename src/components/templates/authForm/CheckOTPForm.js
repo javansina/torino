@@ -9,8 +9,6 @@ import CountdownTimer from "./CountdownTimer";
 import toast from "react-hot-toast";
 import { useSendOtp } from "@/core/services/mutations";
 
-import { useQueryClient } from "@tanstack/react-query";
-
 import { usePathname, useRouter } from "next/navigation";
 
 function CheckOTPForm({
@@ -40,7 +38,7 @@ function CheckOTPForm({
     mutate(
       { mobile, code },
       {
-        onSuccess: (data) => {
+        onSuccess: () => {
           setIsOpen(false);
           setStep(1);
           setIsLogin(true);
@@ -55,7 +53,7 @@ function CheckOTPForm({
 
   const { isPending: tryAgain, mutate: tryAgainMutate } = useSendOtp();
 
-  const sendOtpHandler = (event) => {
+  const sendOtpHandler = () => {
     if (tryAgain) return;
     tryAgainMutate(
       { mobile },
@@ -85,7 +83,7 @@ function CheckOTPForm({
   };
   if (!isClient) return null;
   return (
-    <div className="relative flex h-[362px] w-[571px] flex-col rounded-[20px] bg-white p-10 shadow-[0_4px_4px_-0px_rgba(0,0,0,0.25)]">
+    <div className="relative flex min-w-[358px] flex-col rounded-[20px] bg-white p-10 shadow-[0_4px_4px_-0px_rgba(0,0,0,0.25)]">
       <div onClick={closeHandler} className="absolute right-5 top-5">
         <img
           className="size-6"
@@ -112,7 +110,7 @@ function CheckOTPForm({
         className="flex flex-1 flex-col items-center justify-end gap-y-2"
         onSubmit={checkOtpHandler}
       >
-        <h4 className="text-center text-[28px] font-semibold">
+        <h4 className="mt-5 text-center text-[25px] font-semibold md:text-[28px]">
           کد تایید را وارد کنید
         </h4>
         <label className="font-VazirRegular">

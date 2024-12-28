@@ -1,7 +1,30 @@
 import axios from "axios";
 
-import { getCookie, setCookie } from "../utils/cookie";
+const { cookies } = require("next/headers");
 
+function setCookie(name, value, days = 30) {
+  if (typeof window === "undefined") {
+    cookies.set({
+      name,
+      value,
+      maxAge: days * 24 * 60 * 60,
+    });
+  }
+}
+
+function getCookie(name) {
+  if (typeof window === "undefined") {
+    const cookieStore = cookies();
+    const token = cookieStore.get(name)?.value;
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+  } else {
+    const value = `; ${document?.cookie}`;
+    const parts = value?.split(`; ${name}=`);
+    if (parts?.length === 2) return parts?.pop()?.split(";")?.shift();
+  }
+}
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   headers: {

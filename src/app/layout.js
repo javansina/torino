@@ -24,7 +24,6 @@ export default function RootLayout({ children }) {
       >
         <TanstackQueryProvider>
           <AuthForm>{children}</AuthForm>
-          <ReactQueryDevtools />
         </TanstackQueryProvider>
         <Toaster />
       </body>

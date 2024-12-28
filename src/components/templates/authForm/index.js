@@ -5,7 +5,7 @@ import Header from "../layout/header";
 import Footer from "../layout/footer";
 import { getCookie } from "@/core/utils/cookie";
 import { usePathname } from "next/navigation";
-import { getNewTokens } from "@/core/config/api";
+import { getNewTokens } from "@/app/api/api";
 
 const LoginContext = createContext();
 
