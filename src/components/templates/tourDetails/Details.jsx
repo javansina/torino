@@ -7,7 +7,7 @@ import detailsFormatter from "@/core/utils/helper/detailsFormatter";
 import ReservationButton from "./ReservationBurron";
 
 export default function Details({ data }) {
-  const { id, image, title, availableSeats, insurance } = data?.data;
+  const { id, image, title, availableSeats, insurance, origin } = data?.data;
   const {
     originCity,
     tourExpired,
@@ -22,7 +22,7 @@ export default function Details({ data }) {
   console.log(id);
 
   return (
-    <main className="container">
+    <main className="container pb-10">
       <div className="rounded-[10px] bg-background xs:border xs:p-4">
         <div className="flex flex-col">
           <div className="relative flex flex-col xs:flex-row-reverse xs:justify-between md:flex-row md:justify-start">
@@ -103,6 +103,7 @@ export default function Details({ data }) {
 
           <div className="mt-4">
             <Options
+              origin={origin}
               originCity={originCity}
               monthNomToFa={monthNomToFa}
               date={date}

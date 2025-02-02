@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 export default function Options({
+  origin,
   monthNomToFa,
   date,
   dateBack,
@@ -21,7 +22,7 @@ export default function Options({
           </div>
           <span className="">مبدا</span>
         </div>
-        <span className="w-full text-center">{"lain"}</span>
+        <span className="w-full text-center">{origin.faName}</span>
       </div>
       <div className="flex w-fit flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">
         <div className="flex w-[120px] items-center justify-center gap-x-2 text-myGray-320">
