@@ -14,8 +14,6 @@ const month = {
 };
 
 export default function detailsFormatter(data) {
-  console.log(data);
-
   const {
     origin: { id: originId },
     startDate,

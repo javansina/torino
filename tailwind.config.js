@@ -103,6 +103,13 @@ module.exports = {
         "66/100": "50 / 33",
       },
     },
+    keyframes: {
+      shimmer: {
+        "100%": {
+          transform: "translateX(100%)",
+        },
+      },
+    },
   },
   plugins: [
     function ({ addUtilities }) {

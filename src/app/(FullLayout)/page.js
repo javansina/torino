@@ -2,17 +2,20 @@ import Banner from "@/components/templates/homePage/Banner";
 import Main from "@/components/templates/homePage/Main";
 import SearchFrom from "@/components/templates/homePage/Search";
 import Tours from "@/components/templates/homePage/Tours";
+import { CardsSkeleton } from "@/components/templates/skeletons";
 
-import { serverFetch } from "@/core/services/http";
+import { Suspense } from "react";
 
-export default async function Home({ searchParams }) {
-  const data = await serverFetch("tour", searchParams, "no-store");
+export default async function Home(props) {
+  const query = await props.searchParams;
 
   return (
     <>
       <Banner />
       <SearchFrom />
-      <Tours data={data} />
+      <Suspense fallback={<CardsSkeleton />}>
+        <Tours query={query} />
+      </Suspense>
       <Main />
     </>
   );

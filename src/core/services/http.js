@@ -12,7 +12,8 @@ const serverFetch = async (
   if (endpoint) url += endpoint;
   if (query) url += `?${queryString.stringify(query)}`;
 
-  console.log(url);
+  // promise to test Suspense
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
   try {
     const res = await fetch(`${url}`, {
@@ -22,8 +23,6 @@ const serverFetch = async (
       },
     });
     const json = await res.json();
-    console.log("data", json);
-
     return json;
   } catch (error) {
     console.log(error);

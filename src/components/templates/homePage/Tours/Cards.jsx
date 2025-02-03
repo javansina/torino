@@ -1,92 +1,69 @@
-import { separate } from "@/core/utils/helper/detailsFormatter";
+"use client";
 import Image from "next/image";
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import Card from "./Card";
 
-export default function Cards({ item }) {
-  const date = new Date(item.startDate);
-  const dateBack = new Date(item.endDate) - date;
-  const tourExpired = date - new Date();
-  const travelTime = Math.round(dateBack / 24 / 60 / 60 / 1000);
-  const fleetVehicle = {
-    Bus: "اتوبوس",
-    Van: "ون",
-    SUV: "SUV",
-    Airplane: "هواپیما",
-  };
+export default function Cards({ data }) {
+  const [moreCard, setMoreCard] = useState(false);
+  const [userDivceW, setUserDivceW] = useState(null);
+  const [isClient, setIsClient] = useState(false);
 
-  const monthNomToFa = new Intl.DateTimeFormat("fa").format(date).split("/");
-
-  const month = {
-    "\u06F1": "فروردین",
-    "\u06F2": "اردیبهشت",
-    "\u06F3": "خرداد",
-    "\u06F4": "تیر",
-    "\u06F5": "مرداد",
-    "\u06F6": "شهریور",
-    "\u06F7": "مهر",
-    "\u06F8": "آبان",
-    "\u06F9": "آذر",
-    "\u06F1\u06F0": "دی",
-    "\u06F1\u06F1": "بهمن",
-    "\u06F1\u06F2": "اسفند",
-  };
-
-  const result = [
-    month[monthNomToFa[1]],
-    travelTime,
-    fleetVehicle[item.fleetVehicle],
-    item.options[1],
-  ];
-
-  const price = separate(item.price);
-
-  return (
-    <div
-      key={item.id}
-      className="col-span-12 flex flex-col xsB:col-span-6 md:col-span-4 xl:col-span-3"
-    >
-      <div className="relative h-[159px] w-full">
-        <Image src={item.image} fill alt={item.title} />
-      </div>
-      <div className="flex flex-col gap-y-[6px] rounded-b-[12px] border p-2">
-        <span className="text-[22px] leading-[34px] tracking-[0.04rem]">
-          {item.title}
-        </span>
-        <span className="line-clamp-1 text-[15px] text-myGray-410/70">
-          <span>{result[0]} ماه ، </span>
-          <span className="font-VazirDigit">{result[1]} روزه ، </span>
-          <span>{result[2]} ، </span>
-          <span>{result[3]}</span>
-        </span>
-        {tourExpired < 0 ? (
-          <span className="line-clamp-1 text-[15px] text-myRed-100">
-            منقضی شده است!
-          </span>
-        ) : item.availableSeats > 0 ? (
-          <span className="line-clamp-1 text-[15px] text-myGray-410/70">
-            ظرفیت {item.availableSeats} نفر
-          </span>
-        ) : (
-          <span className="line-clamp-1 text-[15px] text-myRed-100">
-            ظرفیت تکیمل است!
-          </span>
-        )}
-
-        <div className="flex items-center justify-between border-t">
-          <Link
-            href={`/tour-details/${item.id}`}
-            className="mt-[6px] rounded-[5px] bg-myGreen-200 px-[38px] pb-[8px] pt-[4px] text-background"
-          >
-            رزرو
-          </Link>
-          <span>
-            <span className="pt-2 font-VazirDigitRegular text-myBlue-100">
-              {price}
-            </span>
-            <span className="px-2 text-myGray-410/80">تومان</span>
+  useEffect(() => {
+    setUserDivceW(window.innerWidth);
+    setIsClient(true);
+  }, []);
+  if (data.length < 1) {
+    return (
+      <section className="container font-VazirMedium">
+        <div className="mb-3">
+          <span className="prevent-select font-VazirRegular text-[32px]">
+            متاسفم ! فعلا چنین توری نداریم 😑
           </span>
         </div>
-      </div>
-    </div>
+      </section>
+    );
+  }
+  return (
+    <section className="container font-VazirMedium">
+      {isClient && (
+        <>
+          <div className="mb-3">
+            <span className="prevent-select font-VazirRegular text-[32px]">
+              همه تور ها
+            </span>
+          </div>
+          <div className="min-h-fit">
+            <div className="grid grid-cols-12 gap-x-[25px] gap-y-[30px]">
+              {moreCard || userDivceW > 767
+                ? data.map((item) => (
+                    <Card key={item.id} item={item} moreCard={moreCard} />
+                  ))
+                : data
+                    .slice(0, 4)
+                    .map((item) => (
+                      <Card key={item.id} item={item} moreCard={moreCard} />
+                    ))}
+            </div>
+            {userDivceW < 767 && (
+              <div
+                onClick={() => setMoreCard((b) => !b)}
+                className="mx-auto mt-2 flex w-fit cursor-pointer items-center gap-x-2 p-2 child:hover:text-black/90"
+              >
+                <span className="font-VazirRegular text-[13px] text-black/50">
+                  {moreCard ? "مشاهده کمتر" : `مشاهده بیشتر`}
+                </span>
+                <div className={`relative h-3 w-3 ${moreCard && "rotate-180"}`}>
+                  <Image
+                    fill={true}
+                    src={"/images/arrow-down.svg"}
+                    alt="arrow"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        </>
+      )}
+    </section>
   );
 }
