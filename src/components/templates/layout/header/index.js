@@ -3,7 +3,7 @@
 import Image from "next/image";
 import LoginButton from "./LoginButton";
 import NavBarM from "./NavBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { setCookie } from "@/core/utils/cookie";
 
@@ -23,6 +23,11 @@ export default function Header({ isLogin, setIsLogin, setIsOpen, isOpen }) {
   const [step, setStep] = useState(1);
   const [mobile, setMobile] = useState("");
   const [isExpired, setIsExpired] = useState(false);
+  const [isClient, setIsIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsIsClient(true);
+  }, []);
 
   const [sideNav, setSideNav] = useState(false);
   const [dropDown, setDropDown] = useState(false);
@@ -60,7 +65,7 @@ export default function Header({ isLogin, setIsLogin, setIsOpen, isOpen }) {
             <NavBarM sideNav={sideNav} />
           </div>
           <div className="lg:mr-[40px] xl:mr-[84px]">
-            {isLogin ? (
+            {isClient && isLogin ? (
               <div className="relative delay-150">
                 <div
                   onClick={() => setDropDown(true)}
