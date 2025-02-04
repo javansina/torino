@@ -6,7 +6,7 @@ import detailsFormatter, {
 import OutsideClickHandler from "@/core/utils/helper/OutsideClickHandler";
 import Image from "next/image";
 import { personalInfo } from "@/core/schema";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Calendar, CalendarProvider } from "zaman";
 import { useForm } from "react-hook-form";
@@ -14,7 +14,13 @@ import { usePostOrder } from "@/core/services/mutations";
 import toast from "react-hot-toast";
 import { useGetUserBasket } from "@/core/services/queries";
 import { useRouter } from "next/navigation";
-export default function Form({ data }) {
+import PurchaseDetails from "./PurchaseDetails";
+import PurchaseDetailsProvider from "./PurchaseDetailsProvider";
+import { getCookie } from "@/core/utils/cookie";
+import { useLogin } from "../authForm";
+import { PurchaseDetailsSkeleton } from "../skeletons";
+import Link from "next/link";
+export default function Form() {
   const {
     register,
     handleSubmit,
@@ -25,19 +31,21 @@ export default function Form({ data }) {
   });
 
   const [gender, setGender] = useState([false, ""]);
-  const [details, setDetails] = useState({ travelTime: "", pricee: "" });
+
+  const [token, setToken] = useState("");
+  const [isEmptyBasket, setIsEmptyBasket] = useState(false);
   const [nationality, setNationality] = useState("");
   const [dateSelecting, setDateSelecting] = useState(false);
   const [calendarValue, setCalendarValue] = useState("");
 
+  useEffect(() => {
+    const cookie = getCookie("accessToken");
+    setToken(cookie);
+  }, []);
+  const { isLogin } = useLogin();
   const { mutate } = usePostOrder();
 
   const router = useRouter();
-
-  useEffect(() => {
-    const { travelTime, pricee } = detailsFormatter({ data });
-    setDetails({ travelTime, pricee });
-  }, [data]);
 
   const submitHandler = (form) => {
     mutate(
@@ -66,14 +74,14 @@ export default function Form({ data }) {
       onSubmit={handleSubmit(submitHandler)}
       className="flex min-w-full flex-col gap-x-[30px] lg:flex-row"
     >
-      <div className="w-full rounded-[10px] border bg-background p-4">
+      <div className="w-full rounded-[10px] border bg-background px-6 pb-9 pt-6">
         <div className="mb-[17px] flex items-center gap-x-3">
           <div className="relative h-6 w-6">
             <Image src={"/images/profile (2).svg"} alt="prof" fill={true} />
           </div>
           <span className="font-VazirRegular text-[24px]">مشخصات مسافر</span>
         </div>
-        <div className="relative grid grid-cols-12 gap-6">
+        <div className="relative grid grid-cols-12 gap-x-6 gap-y-9">
           <input
             className="col-span-12 line-clamp-1 rounded-lg border border-black/25 px-2 py-1.5 leading-10 xs:col-span-6 md:col-span-4"
             {...register("fullName")}
@@ -162,31 +170,29 @@ export default function Form({ data }) {
       </div>
 
       {/* {!isError && !isPending && ( */}
-      <div className="my-[30px] flex min-w-[320px] flex-col justify-between rounded-[10px] border bg-background p-4 lg:my-0">
-        <div className="dashed-border-checkout border-t-none flex items-center justify-between pb-6 pt-3 leading-5">
-          <span className="font-VazirMedium text-[24px]">{data?.title}</span>
-          <div className="flex gap-x-2 child:font-VazirDigitRegular child:text-myGray-300">
-            <span>{details.travelTime} روز</span>
-            <span>و</span>
-            <span>{details.travelTime - 1} شب</span>
-          </div>
-        </div>
-
-        <div className="flex h-fit items-center justify-between py-3">
-          <span className="font-VazirRegular text-myGray-400">قیمت نهایی</span>
-          <div className="flex items-center gap-x-1">
-            <span className="font-VazirDigitRegular text-[24px] text-myBlue-100">
-              {details.pricee}
-            </span>
-            <span className="font-VazirThin text-sm">تومان</span>
-          </div>
-        </div>
-        <button
-          type="submit"
-          className="w-full rounded-[10px] bg-myGreen-200 py-3 text-background"
-        >
-          ثبت و خرید نهایی
-        </button>
+      <div className="my-[30px] flex min-w-[320px] flex-col justify-between rounded-[10px] border bg-background p-6 lg:my-0">
+        <Suspense fallback={<PurchaseDetailsSkeleton />}>
+          <PurchaseDetailsProvider
+            token={token}
+            isLogin={isLogin}
+            setIsEmptyBasket={setIsEmptyBasket}
+          />
+        </Suspense>
+        {isEmptyBasket ? (
+          <Link
+            href={"/"}
+            className="w-full rounded-[10px] bg-myRed-100/60 py-3 text-center font-VazirMedium tracking-wider text-background"
+          >
+            بازگشت به صفحه اصلی
+          </Link>
+        ) : (
+          <button
+            type="submit"
+            className="w-full rounded-[10px] bg-myGreen-200 py-3 font-VazirMedium tracking-wide text-background"
+          >
+            ثبت و خرید نهایی
+          </button>
+        )}
       </div>
       {/* )} */}
     </form>

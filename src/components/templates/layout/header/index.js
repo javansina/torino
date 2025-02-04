@@ -79,7 +79,7 @@ export default function Header({ isLogin, setIsLogin, setIsOpen, isOpen }) {
                     />
                   </div>
 
-                  <span className="rounded-full border border-myGreen-200/30 px-1.5 py-0.5 font-VazirDigitBold text-[14px] font-medium xs:text-[18px] md:text-[18px]">
+                  <span className="border-myGreen-200/30 px-1.5 py-0.5 font-VazirDigitBold text-[14px] font-medium xs:text-[18px] md:text-[18px]">
                     {data?.data?.mobile}
                   </span>
 

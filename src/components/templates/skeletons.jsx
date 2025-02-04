@@ -22,11 +22,9 @@ export function CardSkeleton() {
 
 export function CardsSkeleton() {
   return (
-    <section className="container font-VazirMedium">
-      <div className="mb-3">
-        <span className="prevent-select font-VazirRegular text-[32px]">
-          همه تور ها
-        </span>
+    <section className="container">
+      <div className="mb-9">
+        <span className="text-[32px]">همه تور ها</span>
       </div>
       <div className="grid grid-cols-12 gap-x-[25px] gap-y-[30px]">
         <CardSkeleton />
@@ -35,5 +33,25 @@ export function CardsSkeleton() {
         <CardSkeleton />
       </div>
     </section>
+  );
+}
+
+export function PurchaseDetailsSkeleton() {
+  return (
+    <>
+      <div
+        className={`${shimmer} dashed-border-checkout border-t-none relative flex items-center justify-between overflow-hidden pb-8 pt-6 leading-5`}
+      >
+        <span className="h-6 w-24 rounded-md bg-gray-200/70"></span>
+        <div className="h-6 w-24 rounded-md bg-gray-200/70"></div>
+      </div>
+
+      <div
+        className={`${shimmer} relative flex h-fit items-center justify-between overflow-hidden py-6`}
+      >
+        <span className="h-9 w-28 rounded-lg bg-gray-200/70"></span>
+        <span className="h-9 w-28 rounded-lg bg-gray-200/70"></span>
+      </div>
+    </>
   );
 }

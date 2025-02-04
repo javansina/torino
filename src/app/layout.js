@@ -4,7 +4,6 @@ import TanstackQueryProvider from "@/components/partials/provider/TanstackQueryP
 import { Toaster } from "react-hot-toast";
 
 import AuthForm from "@/components/templates/authForm";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const Vazir = localFont({
   src: "./fonts/Vazir-Variable.woff2",
@@ -25,7 +24,7 @@ export default function RootLayout({ children }) {
         <TanstackQueryProvider>
           <AuthForm>{children}</AuthForm>
         </TanstackQueryProvider>
-        <Toaster />
+        <Toaster containerClassName="font-VazirDigitRegular" />
       </body>
     </html>
   );
