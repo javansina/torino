@@ -1,8 +1,6 @@
 "use client";
-import { useGetUserProfile } from "@/core/services/queries";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+
+import { useRouter } from "next/navigation";
 import { useLogin } from "../authForm";
 import { usePutTourInBasket } from "@/core/services/mutations";
 import toast from "react-hot-toast";
@@ -44,11 +42,11 @@ export default function ReservationButton({ id, tourExpired, pricee }) {
       >
         رزرو و خرید
       </div>
-      <div>
-        <span className="font-VazirDigitRegular text-[24px] font-medium text-myBlue-100 lg:text-[28px]">
+      <div className="flex items-center">
+        <span className="h-fit font-VazirDigitRegular text-[24px] font-medium text-myBlue-100 lg:text-[28px]">
           {pricee}
         </span>
-        <span className="font-VazirDigitThin text-[10px] md:text-[14px]">
+        <span className="mr-1 mt-2 h-fit font-VazirDigitThin text-[10px] md:text-[14px]">
           تومان
         </span>
       </div>

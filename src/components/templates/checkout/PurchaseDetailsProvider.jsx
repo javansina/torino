@@ -9,7 +9,7 @@ export default async function PurchaseDetailsProvider({
 }) {
   const data = await serverFetch("basket", null, "no-store", token);
 
-  if (!data || !isLogin) return <PurchaseDetailsSkeleton />;
+  if (!data || !isLogin) return <h1>مشکلی پیش امد !</h1>;
 
   return <PurchaseDetails data={data} setIsEmptyBasket={setIsEmptyBasket} />;
 }

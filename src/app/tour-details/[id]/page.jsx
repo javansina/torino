@@ -1,17 +1,15 @@
-"use client";
-
+import { TourDetailsSkeleton } from "@/components/templates/skeletons";
+import Tour from "@/components/templates/tourDetails";
 import Details from "@/components/templates/tourDetails/Details";
-import { useGetTourById } from "@/core/services/queries";
-import { usePathname } from "next/navigation";
+import { serverFetch } from "@/core/services/http";
+import { Suspense } from "react";
 
-export default function TourDetails() {
-  const path = usePathname().split("/");
-  const { data, isPending } = useGetTourById(path[2]);
+export default async function TourDetails(props) {
+  const tourId = await props.params.id;
 
-  if (isPending) return <h1 className="mt-[100px]">loading</h1>;
   return (
-    <div className="pt-[90px] xs:bg-myGray-110">
-      <Details data={data} />
-    </div>
+    <Suspense fallback={<TourDetailsSkeleton />}>
+      <Tour tourId={tourId} />
+    </Suspense>
   );
 }

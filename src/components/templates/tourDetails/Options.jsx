@@ -10,8 +10,8 @@ export default function Options({
   insurance,
 }) {
   return (
-    <div className="flex overflow-y-hidden py-4 md:w-full lg:justify-between lg:divide-x lg:divide-x-reverse">
-      <div className="flex w-fit flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">
+    <div className="flex divide-x divide-x-reverse overflow-y-hidden pt-4 md:w-full lg:justify-between">
+      <div className="flex w-full flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">
         <div className="mx-auto flex w-[80px] items-center gap-x-2 text-myGray-320">
           <div className="relative mt-1 h-4 w-4">
             <Image
@@ -24,7 +24,7 @@ export default function Options({
         </div>
         <span className="w-full text-center">{origin.faName}</span>
       </div>
-      <div className="flex w-fit flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">
+      <div className="flex w-full flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">
         <div className="flex w-[120px] items-center justify-center gap-x-2 text-myGray-320">
           <div className="relative mt-1 h-4 w-4">
             <Image
@@ -40,7 +40,7 @@ export default function Options({
         </span>
       </div>
 
-      <div className="flex w-fit flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">
+      <div className="flex w-full flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">
         <div className="flex w-[120px] items-center justify-center gap-x-2 text-myGray-320">
           <div className="relative mt-1 h-4 w-4">
             <Image
@@ -55,7 +55,7 @@ export default function Options({
           {monthNomToFa(dateBack)[0]}
         </span>
       </div>
-      <div className="flex w-fit flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">
+      <div className="flex w-full flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">
         <div className="flex w-[120px] items-center justify-center gap-x-2 text-myGray-320">
           <div className="relative mt-1 h-5 w-5">
             <Image fill={true} src={"/images/transportation.png"} alt="moz" />
@@ -70,7 +70,7 @@ export default function Options({
         </div>
       </div>
 
-      <div className="flex w-fit flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">
+      <div className="flex w-full flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">
         <div className="flex w-[120px] items-center justify-center gap-x-2 text-myGray-320">
           <div className="relative mt-1 h-4 w-4">
             <Image
