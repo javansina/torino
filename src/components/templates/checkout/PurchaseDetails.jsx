@@ -46,7 +46,7 @@ export default function PurchaseDetails({ isEmptyBasket, setIsEmptyBasket }) {
         </>
       ) : (
         <>
-          <div className="dashed-border-checkout border-t-none flex items-center justify-between pb-8 pt-6 leading-5">
+          <div className="dashed-border-checkout border-t-none flex items-center justify-between pb-8 pt-6 leading-5 lg:pb-12">
             <span className="font-VazirMedium text-[24px]">
               {data?.data?.title}
             </span>
