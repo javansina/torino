@@ -1,16 +1,15 @@
 "use client";
+
 import Image from "next/image";
-import { Controller, useForm } from "react-hook-form";
 import { DatePicker } from "zaman";
-
 import queryString from "query-string";
-
-import { flattenObject } from "@/core/utils/helper/helper";
-
 import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+
 import useQuery from "@/core/hooks/query";
+import { flattenObject } from "@/core/utils/helper/helper";
 import { dateToIso } from "@/core/utils/helper/detailsFormatter";
-import { useEffect, useState } from "react";
 import OutsideClickHandler from "@/core/utils/helper/OutsideClickHandler";
 
 export default function SearchFrom() {
@@ -22,9 +21,7 @@ export default function SearchFrom() {
   const [originDropDown, setOriginDropDown] = useState(false);
   const [destinationDropDown, setDestinationDropDown] = useState(false);
   const [isSelecting, setIsSelecting] = useState(false);
-
   const [origin, setOrigin] = useState("مبدا");
-
   const [destination, setDestination] = useState("مقصد");
 
   useEffect(() => {
@@ -78,10 +75,6 @@ export default function SearchFrom() {
     { id: 3, destination: "مادرید" },
   ];
 
-  //   const origins = originCity.filter((item) => item.origin === origin);
-  //   const destinations = originCity.filter(
-  //     (item) => item.destination === destination,
-  //   );
   const originHandler = (originId, originName) => {
     setValue("originId", originName);
     setOrigin(originName);

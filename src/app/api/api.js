@@ -15,7 +15,7 @@ function setCookie(name, value, days = 30) {
   }
 }
 
-function getCookie(name) {
+export function getCookie(name) {
   if (typeof window === "undefined") {
     const cookieStore = cookies();
     const token = cookieStore.get(name)?.value;

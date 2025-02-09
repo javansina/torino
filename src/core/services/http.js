@@ -13,7 +13,7 @@ const serverFetch = async (
   if (query) url += `?${queryString.stringify(query)}`;
 
   // Promise to test Suspense
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   try {
     const res = await fetch(`${url}`, {

@@ -9,8 +9,8 @@ export default function Main() {
     <>
       <section className="container mb-[90px]">
         <div className="mt-[82px] rounded-[10px] border border-black/25 md:flex">
-          <div className="prevent-select relative flex h-[128px] w-full flex-col rounded-t-[10px] bg-myGreen-200 p-3 pb-[52px] STxsD:p-6 md:h-[251px] md:rounded-b-[10px] md:pr-10 md:pt-16 xl:pr-[57px] xl:pt-9">
-            <div className="absolute bottom-0 left-0">
+          <div className="prevent-select relative flex h-[128px] w-full flex-col rounded-t-[10px] bg-myGreen-200 p-3 pb-[52px] STxsD:p-6 md:h-[200px] md:rounded-b-[10px] md:pr-10 md:pt-14 mdC:pt-9 xl:pr-[57px] xl:pt-9">
+            <div className="absolute bottom-0 left-0 md:-left-6 xl:left-0">
               <div className="relative h-[156px] w-[195px] STxsD:ml-5 md:h-[225px] md:w-[308px]">
                 <Image
                   fill={true}
@@ -29,7 +29,7 @@ export default function Main() {
               به هرکجا که میخواهید!
             </span>
           </div>
-          <div className="flex items-center justify-between px-3 py-3 STxsA:px-7 md:h-[251px] md:w-[320px] md:flex-col md:justify-center md:gap-y-3">
+          <div className="flex items-center justify-between px-3 py-3 STxsA:px-3 xsB:px-7 md:h-[200px] md:w-[320px] md:flex-col md:justify-center md:gap-y-3">
             <div className="flex gap-x-1 STxsA:gap-x-2">
               <span className="font-VazirDigitBold STxsA:text-[20px] mdC:text-[24px] xl:text-[28px]">
                 021-1840
@@ -49,7 +49,7 @@ export default function Main() {
         </div>
       </section>
       <section className="prevent-select container">
-        <div className="mb-8 flex flex-col items-end gap-x-36 md:flex-row mdC:items-start xl:items-center">
+        <div className="mb-12 flex flex-col items-end gap-x-36 md:flex-row mdC:items-start xl:items-center">
           <div className="mb-11 flex w-full lg:w-1/2">
             <div>
               <div className="flex gap-x-2 md:gap-x-[15px]">

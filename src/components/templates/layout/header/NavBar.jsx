@@ -28,7 +28,7 @@ export default function NavBarM({ sideNav }) {
 
   return (
     <ul
-      className={`flex ${sideNav ? "flex-col" : "hidden"} justify-between gap-y-6 md:flex md:flex-row md:gap-x-4 md:pr-5 lg:gap-x-7 xl:gap-x-10`}
+      className={`${sideNav ? "flex flex-col" : "hidden"} justify-between gap-y-6 md:flex md:flex-row md:gap-x-4 md:pr-5 lg:gap-x-7 xl:gap-x-10`}
     >
       {links.map((item) => (
         <li

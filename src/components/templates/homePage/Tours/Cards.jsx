@@ -18,7 +18,7 @@ export default function Cards({ data }) {
       <section className="container font-VazirMedium">
         <div className="mb-3">
           <span className="prevent-select font-VazirRegular text-[32px]">
-            متاسفم ! فعلا چنین توری نداریم 😑
+            متاسفم ! فعلا چنین توری نداریم
           </span>
         </div>
       </section>

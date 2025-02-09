@@ -3,6 +3,38 @@
 @tailwind utilities;
 
 @layer utilities {
+  body {
+    --sb-track-color: #d6d9d6;
+    --sb-thumb-color: #10411b;
+    --sb-size: 6px;
+  }
+
+  body::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+
+  body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+  }
+
+  body::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: var(--sb-thumb-color);
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    body {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
   .shadow-neumorphism {
     border-radius: 50px;
     background: #eff5ef;

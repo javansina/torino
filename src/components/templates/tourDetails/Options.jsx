@@ -10,7 +10,7 @@ export default function Options({
   insurance,
 }) {
   return (
-    <div className="flex divide-x divide-x-reverse overflow-y-hidden pt-4 md:w-full lg:justify-between">
+    <div className="flex divide-x divide-x-reverse overflow-y-hidden py-4 md:w-full lg:justify-between">
       <div className="flex w-full flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">
         <div className="mx-auto flex w-[80px] items-center gap-x-2 text-myGray-320">
           <div className="relative mt-1 h-4 w-4">

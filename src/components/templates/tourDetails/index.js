@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import Details from "./Details";
 import { serverFetch } from "@/core/services/http";
 

@@ -97,7 +97,7 @@ export function TourDetailsSkeleton() {
 
             <div className="mt-4">
               <div
-                className={`${shimmer} scrollbar-webkitu relative flex divide-x divide-x-reverse overflow-y-hidden pt-4 md:w-full lg:justify-between`}
+                className={`${shimmer} hide-scrollbar scrollbar-webkitu relative flex divide-x divide-x-reverse overflow-y-hidden pt-4 md:w-full lg:justify-between`}
               >
                 <div className="flex w-full flex-col items-center gap-y-2 px-4 lgB:px-8">
                   <div className="flex w-[100px] items-center justify-center gap-x-2">

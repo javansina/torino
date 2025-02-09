@@ -1,25 +1,22 @@
 "use client";
-import detailsFormatter, {
-  formatDate,
-  monthNomToFa,
-} from "@/core/utils/helper/detailsFormatter";
-import OutsideClickHandler from "@/core/utils/helper/OutsideClickHandler";
-import Image from "next/image";
-import { personalInfo } from "@/core/schema";
-import { Suspense, useEffect, useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
+
+import { useEffect, useMemo, useState } from "react";
 import { Calendar, CalendarProvider } from "zaman";
-import { useForm } from "react-hook-form";
-import { usePostOrder } from "@/core/services/mutations";
-import toast from "react-hot-toast";
-import { useGetUserBasket } from "@/core/services/queries";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import Image from "next/image";
+import Link from "next/link";
+
+import { formatDate, monthNomToFa } from "@/core/utils/helper/detailsFormatter";
+import OutsideClickHandler from "@/core/utils/helper/OutsideClickHandler";
+import { personalInfo } from "@/core/schema";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { usePostOrder } from "@/core/services/mutations";
 import PurchaseDetails from "./PurchaseDetails";
-import PurchaseDetailsProvider from "./PurchaseDetailsProvider";
 import { getCookie } from "@/core/utils/cookie";
 import { useLogin } from "../authForm";
-import { PurchaseDetailsSkeleton } from "../skeletons";
-import Link from "next/link";
+
 export default function Form() {
   const {
     register,
@@ -29,7 +26,6 @@ export default function Form() {
   } = useForm({
     resolver: yupResolver(personalInfo),
   });
-
   const [gender, setGender] = useState([false, ""]);
 
   const [token, setToken] = useState("");
@@ -69,6 +65,10 @@ export default function Form() {
     setValue("gender", v);
     setGender([false, g]);
   };
+  const purchaseData = useMemo(
+    () => ({ token, isLogin, setIsEmptyBasket }),
+    [token, isLogin],
+  );
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
@@ -169,15 +169,11 @@ export default function Form() {
         </div>
       </div>
 
-      {/* {!isError && !isPending && ( */}
       <div className="my-[30px] flex min-w-[320px] flex-col justify-between rounded-[10px] border bg-background p-6 lg:my-0">
-        <Suspense fallback={<PurchaseDetailsSkeleton />}>
-          <PurchaseDetailsProvider
-            token={token}
-            isLogin={isLogin}
-            setIsEmptyBasket={setIsEmptyBasket}
-          />
-        </Suspense>
+        <PurchaseDetails
+          isEmptyBasket={isEmptyBasket}
+          setIsEmptyBasket={setIsEmptyBasket}
+        />
         {isEmptyBasket ? (
           <Link
             href={"/"}
@@ -194,7 +190,6 @@ export default function Form() {
           </button>
         )}
       </div>
-      {/* )} */}
     </form>
   );
 }

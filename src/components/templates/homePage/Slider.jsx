@@ -1,22 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Slider() {
   const [onTop, setOnTop] = useState([0, 1]);
-  const custumClass = [1, "slider-1"];
-  useEffect(() => {
-    slider11(2);
-  }, [onTop]);
-  const slider11 = (num) => {
-    const m = (number) => {
-      const e = number - 1;
-
-      e <= 0 ? num : number - 1 === 0 ? num + e : number;
-    };
-
-    if (onTop[0] - onTop[1] === num) {
-    }
-  };
 
   const slider1 = () => {
     if (onTop[1] === 1) {
@@ -232,7 +218,7 @@ export default function Slider() {
   return (
     <>
       <div className="prevent-select flex w-full flex-col xsC:gap-y-6 md:gap-y-10 lg:w-1/2">
-        <div className="relative h-[290px] STxsB:ml-[5%] STxsD:ml-[11%] xsB:ml-[14%] xsB:h-[350px] xsC:h-[340px] md:ml-0 md:h-[284px] xl:h-[480px]">
+        <div className="relative h-[305px] STxsB:ml-[5%] STxsD:ml-[11%] xsB:ml-[14%] xsB:h-[360px] xsC:h-[360px] md:ml-0 md:h-[370px] xl:h-[530px]">
           <div
             onClick={(e) => {
               if (+e.target.id === onTop[1]) return;
@@ -289,61 +275,61 @@ export default function Slider() {
               alt="asdf"
             />
           </div>
-        </div>
-        <div className="mx-auto mt-4 flex h-[50px] w-fit items-center justify-center text-black">
-          <button
-            className="w-fit"
-            onClick={() => {
-              if (onTop[1] < 4) {
-                setOnTop((i) => [i[1], i[1] + 1]);
-              } else if (onTop[1] === 4) {
-                setOnTop((i) => [i[1], i[1] - 3]);
-              }
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="size-6 md:size-8"
+          <div className="absolute -bottom-10 right-[20%] flex h-[50px] w-fit items-center justify-center text-black STxsB:pr-3 STxsC:pr-5 STxsD:pr-7 STxsE:pr-11 xs:pr-12 xsB:pr-14 xsC:pr-[90px] sm:pr-[110px] smB:pr-[130px] smC:pr-[150px] md:-right-5 md:pr-0 mdB:pr-2 mdC:pr-[55px] lg:pr-[105px] lgB:pr-[155px] xl:pr-[120px]">
+            <button
+              className="w-fit"
+              onClick={() => {
+                if (onTop[1] < 4) {
+                  setOnTop((i) => [i[1], i[1] + 1]);
+                } else if (onTop[1] === 4) {
+                  setOnTop((i) => [i[1], i[1] - 3]);
+                }
+              }}
             >
-              <path
-                fillRule="evenodd"
-                d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="size-6 md:size-8"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
 
-          <span className="ml-1 flex w-fit gap-x-2 px-5 font-VazirDigitBold text-[30px] text-myGray-320">
-            <span>4</span>
-            <span>/</span>
-            <span>{onTop[1]}</span>
-          </span>
+            <span className="ml-1 flex w-fit gap-x-2 px-5 font-VazirDigitBold text-[30px] text-myGray-320">
+              <span>4</span>
+              <span>/</span>
+              <span>{onTop[1]}</span>
+            </span>
 
-          <button
-            className="w-fit"
-            onClick={() => {
-              if (onTop[1] > 1) {
-                setOnTop((i) => [i[1], i[1] - 1]);
-              } else if (onTop[1] === 1) {
-                setOnTop((i) => [i[1], i[1] + 3]);
-              }
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="size-6 md:size-8"
+            <button
+              className="w-fit"
+              onClick={() => {
+                if (onTop[1] > 1) {
+                  setOnTop((i) => [i[1], i[1] - 1]);
+                } else if (onTop[1] === 1) {
+                  setOnTop((i) => [i[1], i[1] + 3]);
+                }
+              }}
             >
-              <path
-                fillRule="evenodd"
-                d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="size-6 md:size-8"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </>
