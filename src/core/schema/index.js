@@ -26,7 +26,12 @@ const personalInfo = object({
 });
 
 const email = object({
-  email: string().required().min(10),
+  email: string()
+    .required("این قسمت نباید خالی بماند!")
+    .matches(
+      /^[\w_\.]+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/,
+      "لطفا یک ایمیل معتبر وارد کنید!",
+    ),
 });
 
 export { bankAcountSchema, personalInfo, email };

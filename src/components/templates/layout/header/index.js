@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
 import { setCookie } from "@/core/utils/cookie";
 
 import ModalContainer from "@/components/partials/container/ModalContainer";
-import SendOTPForm from "../../authForm/SendOTPForm";
-import CheckOTPForm from "../../authForm/CheckOTPForm";
+import SendOTPForm from "../../authProvider/SendOTPForm";
+import CheckOTPForm from "../../authProvider/CheckOTPForm";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useGetUserProfile } from "@/core/services/queries";

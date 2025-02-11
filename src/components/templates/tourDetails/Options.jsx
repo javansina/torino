@@ -9,6 +9,8 @@ export default function Options({
   availableSeats,
   insurance,
 }) {
+  console.log(availableSeats);
+
   return (
     <div className="flex divide-x divide-x-reverse overflow-y-hidden py-4 md:w-full lg:justify-between">
       <div className="flex w-full flex-col items-center gap-y-2 border-l px-4 lg:border-l-0 lgB:px-8">

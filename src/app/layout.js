@@ -3,7 +3,7 @@ import "./globals.css";
 import TanstackQueryProvider from "@/components/partials/provider/TanstackQueryProvider";
 import { Toaster } from "react-hot-toast";
 
-import AuthForm from "@/components/templates/authForm";
+import AuthForm from "@/components/templates/authProvider";
 
 const Vazir = localFont({
   src: "./fonts/Vazir-Variable.woff2",

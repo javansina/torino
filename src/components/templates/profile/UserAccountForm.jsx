@@ -1,20 +1,26 @@
 "use client";
 
+import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+
 import { email } from "@/core/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { setConfig } from "next/config";
-import Image from "next/image";
-import { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 
-export default function UserAccountForm({ data }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [userEmail, setUserEmail] = useState("-");
-  const inputRef = useRef(null);
+export default function UserAccountForm({ data, setIsEditingEmail }) {
+  const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+    if (data?.data?.email) {
+      setUserEmail(data.data.email);
+      setValue("email", data.data.email);
+    }
+  }, []);
+
   const {
     register,
     handleSubmit,
     setValue,
+    trigger,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(email),
@@ -23,47 +29,40 @@ export default function UserAccountForm({ data }) {
   const submitHandler = (form) => {
     console.log(form);
     setValue("email", form.email);
+    setIsEditingEmail(false);
   };
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
-      className="flex flex-col gap-y-7 rounded-[10px] border border-myGray-130 p-4 font-VazirDigitRegular"
+      className="flex w-full flex-wrap items-start justify-start gap-4 xs:justify-between lg:max-w-[350px]"
     >
-      <span className="font-VazirMedium text-[16px]">اطلاعات حساب کاربری</span>
-      <div className="flex w-full justify-between">
-        <span className="font-VazirThin text-[14px]">شماره موبایل</span>
-        <span className="font-VazirDigitRegular">{data?.data?.mobile}</span>
-      </div>
-      <div>
-        <span>ایمیل</span>
+      <div className="relative w-full xs:max-w-[260px] lg:max-w-[240px]">
         <input
           type="text"
           {...register("email")}
-          value={data?.data?.email || userEmail}
-          placeholder="تاریخ تولد"
-          autoComplete="off"
-          readOnly={!isEditing}
-          ref={inputRef}
-          className={`${!isEditing ? "border-none focus:outline-none" : "border border-neutral-500 outline-neutral-500"} no-spin col-span-12 line-clamp-1 w-full rounded-lg px-2 py-1.5 leading-10 xs:col-span-6 md:col-span-4`}
-        />
-        <span>{data?.data?.email || "-"}</span>
-        <div
-          onClick={() => {
-            setIsEditing(true);
-            inputRef.current.focus();
+          value={userEmail}
+          onChange={(e) => {
+            setValue("email", e.target.value);
+            setUserEmail(e.target.value);
+            trigger("email");
           }}
-        >
-          <div className="relative h-4 w-4">
-            <Image fill={true} src={"/images/edit-2.svg"} alt={"editIcon"} />
-          </div>
-          <span>افزودن</span>
+          placeholder="آدرس ایمیل"
+          className={`ltr line-clamp-1 w-full rounded-lg px-2 text-[14px] leading-10 tracking-wide ${!!errors?.email ? "border outline-myRed-100/70" : "border border-neutral-500/40 outline-neutral-500/20"} `}
+        />
+        <div className="absolute -bottom-5 left-0">
+          {!!errors?.email && (
+            <p className="mr-2 w-fit rounded-2xl px-1 font-VazirDigitThin text-xs text-myRed-100">
+              {errors?.email?.message}
+            </p>
+          )}
         </div>
       </div>
+
       <button
         type="submit"
-        className="w-full rounded-[10px] bg-myGreen-200 py-3 text-background"
+        className="w-full max-w-[90px] rounded-lg bg-myGreen-200 py-2 font-VazirRegular text-background"
       >
-        ثبت و خرید نهایی
+        تایید
       </button>
     </form>
   );

@@ -148,3 +148,35 @@ export function TourDetailsSkeleton() {
     </div>
   );
 }
+
+export function ProfileSkeleton() {
+  return (
+    <div className="my-[75px] md:my-[95px]">
+      <section className="container">
+        <div className="flex flex-col gap-x-5 md:grid md:grid-cols-12">
+          <div className="mb-6 flex justify-evenly gap-x-2 border-b md:col-span-3 md:h-[170px] md:flex-col md:justify-between md:rounded-xl md:border">
+            <div className="flex w-1/3 items-center justify-center gap-x-2 rounded-t-[10px] p-3 md:h-1/3 md:w-full md:justify-start md:border-none">
+              <div className="relative mt-0.5 h-4 w-4 md:h-5 md:w-5"></div>
+              <span className="font-VazirThin text-xs md:font-VazirRegular md:text-sm">
+                پروفایل
+              </span>
+            </div>
+            <div className="flex w-1/3 items-center justify-center gap-x-2 p-3 md:h-1/3 md:w-full md:justify-start md:border-b md:border-t md:py-4">
+              <div className="relative mt-0.5 h-4 w-4 md:h-5 md:w-5"></div>
+              <span className="font-VazirThin text-xs md:font-VazirRegular md:text-sm">
+                تورهای من
+              </span>
+            </div>
+            <div className="flex w-1/3 items-center justify-center gap-x-2 p-3 md:h-1/3 md:w-full md:justify-start md:rounded-b-[10px] md:border-none">
+              <div className="relative mt-0.5 h-4 w-4 md:h-5 md:w-5"></div>
+              <span className="font-VazirThin text-xs md:font-VazirRegular md:text-sm">
+                تراکنش ها
+              </span>
+            </div>
+          </div>
+          <div className="col-span-9 h-full">moz</div>
+        </div>
+      </section>
+    </div>
+  );
+}

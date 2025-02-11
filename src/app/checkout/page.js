@@ -4,7 +4,15 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-[90vh] pb-[35px] pt-[90px] xs:bg-myGray-110">
       <div className="container">
-        <Form />
+        <Form
+          whereIam={{
+            isProfile: false,
+            isCheckout: true,
+            data: {
+              title: "مشخصات مسافر",
+            },
+          }}
+        />
       </div>
     </div>
   );

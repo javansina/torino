@@ -15,7 +15,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import PurchaseDetails from "./PurchaseDetails";
 import { personalInfo } from "@/core/schema";
 
-export default function Form() {
+export default function Form({
+  whereIam: {
+    isProfile,
+    isCheckout,
+    data: { title, setIsEditingPersonalInfo = null },
+  },
+}) {
   const {
     register,
     handleSubmit,
@@ -64,14 +70,26 @@ export default function Form() {
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
-      className="flex min-w-full flex-col gap-x-[30px] lg:flex-row"
+      className={`flex min-w-full gap-x-[30px] ${isCheckout && "lg:flex-row"} flex-col`}
     >
-      <div className="w-full rounded-[10px] border bg-background px-6 pb-9 pt-6">
+      <div
+        className={`w-full rounded-[10px] ${isCheckout && "border px-6 pb-9 pt-6"} bg-background`}
+      >
         <div className="mb-[17px] flex items-center gap-x-3">
-          <div className="relative h-6 w-6">
-            <Image src={"/images/profile (2).svg"} alt="prof" fill={true} />
-          </div>
-          <span className="font-VazirRegular text-[24px]">مشخصات مسافر</span>
+          {isCheckout && (
+            <div className="relative h-6 w-6">
+              <Image src={"/images/profile (2).svg"} alt="prof" fill={true} />
+            </div>
+          )}
+          <span
+            className={
+              isCheckout
+                ? "font-VazirRegular text-[24px]"
+                : "font-VazirDigitRegular tracking-wide xsB:text-lg"
+            }
+          >
+            {title}
+          </span>
         </div>
         <div className="grid grid-cols-12 gap-x-6">
           <div className="relative col-span-12 xs:col-span-6">
@@ -185,28 +203,52 @@ export default function Form() {
           </div>
         </div>
       </div>
-
-      <div className="my-[30px] flex min-w-[320px] flex-col justify-between rounded-[10px] border bg-background p-6 lg:my-0">
-        <PurchaseDetails
-          isEmptyBasket={isEmptyBasket}
-          setIsEmptyBasket={setIsEmptyBasket}
-        />
-        {isEmptyBasket ? (
-          <Link
-            href={"/"}
-            className="w-full rounded-[10px] bg-myRed-100/60 py-3 text-center font-VazirMedium tracking-wider text-background"
-          >
-            بازگشت به صفحه اصلی
-          </Link>
-        ) : (
-          <button
-            type="submit"
-            className="w-full rounded-[10px] bg-myGreen-200 py-3 font-VazirMedium tracking-wide text-background"
-          >
-            ثبت و خرید نهایی
-          </button>
-        )}
-      </div>
+      {isCheckout && (
+        <div className="my-[30px] flex min-w-[320px] flex-col justify-between rounded-[10px] border bg-background p-6 lg:my-0">
+          <PurchaseDetails
+            isEmptyBasket={isEmptyBasket}
+            setIsEmptyBasket={setIsEmptyBasket}
+          />
+          <SubmitButton isEmptyBasket={isEmptyBasket} />
+        </div>
+      )}
+      {isProfile && (
+        <>
+          <div className="flex gap-x-7 lg:justify-end">
+            <button className="w-full rounded-lg bg-myGreen-200 py-2.5 text-center font-VazirRegular text-[18px] text-background lg:w-[140px]">
+              تایید
+            </button>
+            <button
+              onClick={() => setIsEditingPersonalInfo(false)}
+              className="w-full rounded-lg border-2 border-myGreen-200 bg-background py-2.5 text-center font-VazirRegular text-[18px] text-myGreen-200 lg:w-[140px]"
+            >
+              انصراف
+            </button>
+          </div>
+        </>
+      )}
     </form>
+  );
+}
+
+function SubmitButton({ isEmptyBasket }) {
+  return (
+    <>
+      {isEmptyBasket ? (
+        <Link
+          href={"/"}
+          className="w-full rounded-[10px] bg-myRed-100/60 py-3 text-center font-VazirMedium tracking-wider text-background"
+        >
+          بازگشت به صفحه اصلی
+        </Link>
+      ) : (
+        <button
+          type="submit"
+          className="w-full rounded-[10px] bg-myGreen-200 py-3 font-VazirMedium tracking-wide text-background"
+        >
+          ثبت و خرید نهایی
+        </button>
+      )}
+    </>
   );
 }

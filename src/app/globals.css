@@ -496,55 +496,75 @@
     font-family: "Vazir-Digit";
     src: url("/fonts/Vazir-Medium-FD-WOL.woff2") format("woff2");
     font-display: swap;
+    font-weight: inherit;
+    font-size: inherit;
   }
   @font-face {
     font-family: "Vazir-Digit-Thin";
     src: url("/fonts/Vazir-Thin-FD.woff2") format("woff2");
     font-display: swap;
+    font-weight: inherit;
+    font-size: inherit;
   }
   @font-face {
     font-family: "Vazir-Digit-Regular";
     src: url("/fonts/Vazir-Regular-FD.woff2") format("woff2");
     font-display: swap;
+    font-weight: inherit;
+    font-size: inherit;
   }
   @font-face {
     font-family: "Vazir-Digit-Bold";
     src: url("/fonts/Vazir-Bold-FD.woff2") format("woff2");
     font-display: swap;
+    font-weight: inherit;
+    font-size: inherit;
   }
 
   @font-face {
     font-family: "Vazir-Black";
     src: url("/fonts/Vazir-Black.woff2") format("woff2");
     font-display: swap;
+    font-weight: inherit;
+    font-size: inherit;
   }
   @font-face {
     font-family: "Vazir-Bold";
     src: url("/fonts/Vazir-Bold.woff2") format("woff2");
     font-display: swap;
+    font-weight: inherit;
+    font-size: inherit;
   }
 
   @font-face {
     font-family: "Vazir-Light";
     src: url("/fonts/Vazir-Light.woff2") format("woff2");
     font-display: swap;
+    font-weight: inherit;
+    font-size: inherit;
   }
 
   @font-face {
     font-family: "Vazir-Medium";
     src: url("/fonts/Vazir-Medium.woff2") format("woff2");
     font-display: swap;
+    font-weight: inherit;
+    font-size: inherit;
   }
 
   @font-face {
     font-family: "Vazir-Regular";
     src: url("/fonts/Vazir-Regular.woff2") format("woff2");
     font-display: swap;
+    font-weight: inherit;
+    font-size: inherit;
   }
 
   @font-face {
     font-family: "Vazir-Thin";
     src: url("/fonts/Vazir-Thin.woff2") format("woff2");
     font-display: swap;
+    font-weight: inherit;
+    font-size: inherit;
   }
 }

@@ -1,11 +1,17 @@
 "use client";
 
+import { useLogin } from "@/components/templates/authProvider";
+import { ProfileSkeleton } from "@/components/templates/skeletons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Layout({ children }) {
+  const { isLogin } = useLogin();
   const path = usePathname();
   const [, , activePath] = path.split("/");
+  if (!isLogin) {
+    return <ProfileSkeleton />;
+  }
 
   return (
     <div className="my-[75px] md:my-[95px]">
@@ -14,7 +20,7 @@ export default function Layout({ children }) {
           <div className="mb-6 flex justify-evenly gap-x-2 border-b md:col-span-3 md:h-[170px] md:flex-col md:justify-between md:rounded-xl md:border">
             <Link
               href={"/profile"}
-              className={`flex w-1/3 items-center justify-center gap-x-2 md:h-1/3 md:w-full md:justify-start md:border-none ${activePath === undefined ? "border-b border-myGreen-200 text-myGreen-200 md:bg-myGreen-90" : "border-none"} rounded-t-[10px] p-3`}
+              className={`flex w-1/3 items-center justify-center gap-x-2 md:h-1/3 md:w-full md:justify-start md:border-none ${activePath === undefined ? "border-b-2 border-myGreen-200 text-myGreen-200 md:bg-myGreen-90" : "border-none"} rounded-t-[10px] p-3`}
             >
               <div className="relative mt-0.5 h-4 w-4 md:h-5 md:w-5">
                 <svg
@@ -38,7 +44,7 @@ export default function Layout({ children }) {
             </Link>
             <Link
               href={"/profile/tours"}
-              className={`flex w-1/3 items-center justify-center gap-x-2 md:h-1/3 md:w-full md:justify-start md:border-b md:border-t md:py-4 ${activePath === "transactions" ? "md:border-b-myGreen-200" : "md:border-t-myGreen-200"} ${activePath === "tours" && "border-b border-myGreen-200 text-myGreen-200 md:bg-myGreen-90"} p-3`}
+              className={`flex w-1/3 items-center justify-center gap-x-2 md:h-1/3 md:w-full md:justify-start md:border-b md:border-t md:py-4 ${activePath === "transactions" ? "md:border-b-myGreen-200" : "md:border-t-myGreen-200"} ${activePath === "tours" && "border-b-2 border-myGreen-200 text-myGreen-200 md:bg-myGreen-90"} p-3`}
             >
               <div className="relative mt-0.5 h-4 w-4 md:h-5 md:w-5">
                 <svg
@@ -74,7 +80,7 @@ export default function Layout({ children }) {
             </Link>
             <Link
               href={"/profile/transactions"}
-              className={`flex w-1/3 items-center justify-center gap-x-2 md:h-1/3 md:w-full md:justify-start md:border-none ${activePath === "transactions" ? "border-b border-myGreen-200 text-myGreen-200 md:bg-myGreen-90" : "border-none"} p-3 md:rounded-b-[10px]`}
+              className={`flex w-1/3 items-center justify-center gap-x-2 md:h-1/3 md:w-full md:justify-start md:border-none ${activePath === "transactions" ? "border-b-2 border-myGreen-200 text-myGreen-200 md:bg-myGreen-90" : "border-none"} p-3 md:rounded-b-[10px]`}
             >
               <div className="relative mt-0.5 h-4 w-4 md:h-5 md:w-5">
                 <svg

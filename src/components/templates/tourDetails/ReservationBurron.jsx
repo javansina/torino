@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useLogin } from "../authForm";
+import { useLogin } from "../authProvider";
 import { usePutTourInBasket } from "@/core/services/mutations";
 import toast from "react-hot-toast";
 
