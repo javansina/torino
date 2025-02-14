@@ -2,12 +2,15 @@ import { object, string } from "yup";
 
 const bankAcountSchema = object({
   shaba_code: string()
-    .required("شماره شبارا وارد کنید")
-    .length(16, "شماره کارت باید ۱۶ عدد باشد"),
+    .required("شماره شبا را وارد کنید!")
+    .length(24, "شماره شبا باید 24 رقم باشد!"),
   debitCard_code: string()
-    .required("چرا خالیست؟!")
-    .length(16, "شماره کارت باید ۱۶ عدد باشد"),
-  accountIdentifier: string().min(1, "باید حداقل ۸ کاراکتر باشد"),
+    .required("شماره کارت را وارد کنید!")
+    .length(16, "شماره کارت باید ۱۶ رقم باشد!"),
+  accountIdentifier: string()
+    .required("شماره حساب را وارد کنید!")
+    .min(12, "شماره حساب باید حداقل 12 رقم باشد!")
+    .max(16, "شماره حساب باید حداکثر 16 رقم باشد!"),
 });
 
 const personalInfo = object({

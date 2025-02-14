@@ -5,14 +5,15 @@ import { useEffect, useState } from "react";
 
 import { email } from "@/core/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { usePutUserData } from "@/core/services/mutations";
 
 export default function UserAccountForm({ data, setIsEditingEmail }) {
   const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
-    if (data?.data?.email) {
-      setUserEmail(data.data.email);
-      setValue("email", data.data.email);
+    if (!!data?.email) {
+      setUserEmail(data.email);
+      setValue("email", data.email);
     }
   }, []);
 
@@ -25,10 +26,18 @@ export default function UserAccountForm({ data, setIsEditingEmail }) {
   } = useForm({
     resolver: yupResolver(email),
   });
+  const { mutate } = usePutUserData();
 
   const submitHandler = (form) => {
-    console.log(form);
-    setValue("email", form.email);
+    if (data?.email !== form.email) {
+      mutate(
+        { ...form },
+        {
+          onSuccess: () => toast.success("تغییرات با موفقیت ذخیره شد!"),
+          onError: (err) => toast.error(err.message),
+        },
+      );
+    }
     setIsEditingEmail(false);
   };
   return (

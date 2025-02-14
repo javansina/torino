@@ -107,8 +107,8 @@ export default function Header({ isLogin, setIsLogin, setIsOpen, isOpen }) {
                         />
                       </div>
                       <span className="w-fit font-VazirDigit text-[14px] font-medium text-myGreen-300 md:text-[16px] lg:text-[18px]">
-                        {!!data?.data?.firstName
-                          ? `${data.data.firstName} ${data.data.lastName}`
+                        {!!data?.data?.fullName
+                          ? `${data.data.fullName}`
                           : data?.data?.mobile}
                       </span>
                     </div>

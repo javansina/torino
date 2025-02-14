@@ -1,17 +1,17 @@
 "use client";
 
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Calendar, CalendarProvider } from "zaman";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { formatDate, monthNomToFa } from "@/core/utils/helper/detailsFormatter";
 import OutsideClickHandler from "@/core/utils/helper/OutsideClickHandler";
-import { usePostOrder } from "@/core/services/mutations";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { usePostOrder, usePutUserData } from "@/core/services/mutations";
 import PurchaseDetails from "./PurchaseDetails";
 import { personalInfo } from "@/core/schema";
 
@@ -19,7 +19,7 @@ export default function Form({
   whereIam: {
     isProfile,
     isCheckout,
-    data: { title, setIsEditingPersonalInfo = null },
+    data: { title, setIsEditingPersonalInfo = null, userData = null },
   },
 }) {
   const {
@@ -37,19 +37,53 @@ export default function Form({
   const [dateSelecting, setDateSelecting] = useState(false);
   const [calendarValue, setCalendarValue] = useState("");
 
-  const { mutate } = usePostOrder();
+  const { mutate: chackoutMutation } = usePostOrder();
+  const { mutate: userProfileMutation } = usePutUserData();
 
   const router = useRouter();
 
+  useEffect(() => {
+    if (isProfile) {
+      if (userData?.fullName) {
+        setValue("fullName", userData.fullName);
+      }
+      if (userData?.gender) {
+        const genderToFarsi = { male: "مرد", female: "زن" };
+        setValue("gender", userData?.gender);
+        setGender(genderToFarsi[userData?.gender]);
+      }
+      if (userData?.nationalCode) {
+        setValue("nationalCode", userData?.nationalCode || "");
+      }
+      if (userData?.birthDate) {
+        setValue("birthDate", userData?.birthDate);
+        setCalendarValue(monthNomToFa(new Date(userData?.birthDate))[0]);
+      }
+    }
+  }, []);
+
   const submitHandler = (form) => {
-    mutate(
-      { ...form },
-      {
-        onError: (err) => toast.error(err.message),
-        onSuccess: () => toast.success("تور با موفقیت خریداری شد!"),
-      },
-    );
-    router.replace("/profile/tours");
+    if (isCheckout) {
+      chackoutMutation(
+        { ...form },
+        {
+          onError: (err) => toast.error(err.message),
+          onSuccess: () => toast.success("تور با موفقیت خریداری شد!"),
+        },
+      );
+      router.replace("/profile/tours");
+    }
+
+    if (isProfile) {
+      userProfileMutation(
+        { ...form },
+        {
+          onSuccess: () => toast.success("تغییرات با موفقیت ذخیره شد!"),
+          onError: (err) => toast.error(err.message),
+        },
+      );
+      setIsEditingPersonalInfo(false);
+    }
   };
 
   const dateChangeHandler = (e) => {
@@ -94,7 +128,7 @@ export default function Form({
         <div className="grid grid-cols-12 gap-x-6">
           <div className="relative col-span-12 xs:col-span-6">
             <input
-              className="line-clamp-1 w-full rounded-lg border border-black/25 px-2 py-1.5 font-VazirDigitRegular leading-10 placeholder:font-VazirDigitRegular"
+              className="line-clamp-1 w-full rounded-lg border border-black/25 px-2 py-1.5 font-VazirDigitRegular leading-7 placeholder:font-VazirDigitRegular"
               {...register("fullName")}
               placeholder="نام و نام خانوادگی"
               type="text"
@@ -110,7 +144,7 @@ export default function Form({
           </div>
           <div className="relative col-span-12 xs:col-span-6">
             <input
-              className="no-spin line-clamp-1 w-full rounded-lg border border-black/25 px-2 py-1.5 font-VazirDigitRegular leading-10 placeholder:font-VazirDigitRegular"
+              className="no-spin line-clamp-1 w-full rounded-lg border border-black/25 px-2 py-1.5 font-VazirDigitRegular leading-7 placeholder:font-VazirDigitRegular"
               {...register("nationalCode")}
               placeholder="کد ملی"
               type="number"
@@ -132,7 +166,7 @@ export default function Form({
               autoComplete="off"
               readOnly
               onClick={() => setDateSelecting(true)}
-              className="no-spin col-span-12 line-clamp-1 w-full rounded-lg border border-black/25 px-2 py-1.5 font-VazirDigitRegular leading-10 placeholder:font-VazirDigitRegular xs:col-span-6"
+              className="no-spin col-span-12 line-clamp-1 w-full rounded-lg border border-black/25 px-2 py-1.5 font-VazirDigitRegular leading-7 placeholder:font-VazirDigitRegular xs:col-span-6"
             />
             {dateSelecting && (
               <OutsideClickHandler
@@ -170,7 +204,7 @@ export default function Form({
               value={gender}
               readOnly
               onClick={() => setGenderDropDown(true)}
-              className="no-spin col-span-12 line-clamp-1 w-full rounded-lg border border-black/25 px-2 py-1.5 font-VazirDigitRegular leading-10 placeholder:font-VazirDigitRegular xs:col-span-6 md:col-span-4"
+              className="no-spin col-span-12 line-clamp-1 w-full rounded-lg border border-black/25 px-2 py-1.5 font-VazirDigitRegular leading-7 placeholder:font-VazirDigitRegular xs:col-span-6 md:col-span-4"
             />
             {genderDropDown && (
               <OutsideClickHandler
@@ -215,7 +249,10 @@ export default function Form({
       {isProfile && (
         <>
           <div className="flex gap-x-7 lg:justify-end">
-            <button className="w-full rounded-lg bg-myGreen-200 py-2.5 text-center font-VazirRegular text-[18px] text-background lg:w-[140px]">
+            <button
+              type="submit"
+              className="w-full rounded-lg bg-myGreen-200 py-2.5 text-center font-VazirRegular text-[18px] text-background lg:w-[140px]"
+            >
               تایید
             </button>
             <button

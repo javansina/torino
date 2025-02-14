@@ -68,7 +68,7 @@ export const fleetVehicles = {
   Airplane: { name: "هواپیما", iconSrc: "/images/airplane.svg" },
   Ship: { name: "کشتی", iconSrc: "/images/ship.svg" },
 };
-export function monthNomToFa(date) {
+export function monthNomToFa(date = "2022-10-02") {
   const newDate = new Intl.DateTimeFormat("fa").format(date).split("/");
   const weekDays = [
     "یکشنبه",
@@ -86,7 +86,6 @@ export function monthNomToFa(date) {
 
 export const formatDate = (date) => {
   const week = date.getDay();
-  console.log(week);
 
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");

@@ -3,9 +3,11 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "travel-agency-api-mytorino.vercel.app",
+        protocol: "http",
+        hostname: "localhost",
+        port: "6500",
         pathname: "/static/images/**",
+        search: "",
       },
     ],
   },

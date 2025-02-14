@@ -174,7 +174,7 @@ export function ProfileSkeleton() {
               </span>
             </div>
           </div>
-          <div className="col-span-9 h-full">moz</div>
+          <div className="col-span-9 h-full">در حال بررسی ورود به حساب</div>
         </div>
       </section>
     </div>
