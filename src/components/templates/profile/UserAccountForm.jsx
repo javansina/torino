@@ -69,7 +69,7 @@ export default function UserAccountForm({ data, setIsEditingEmail }) {
 
       <button
         type="submit"
-        className="w-full max-w-[90px] rounded-lg bg-myGreen-200 py-2 font-VazirRegular text-background"
+        className="w-full max-w-[90px] rounded-lg bg-myGreen-200 py-2 font-VazirRegular text-background hover:bg-myGreen-200/90"
       >
         تایید
       </button>

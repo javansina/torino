@@ -10,19 +10,26 @@ import { useGetUserTours } from "@/core/services/queries";
 export default function UserTours() {
   const { data, isError, isPending } = useGetUserTours();
 
-  if (!isPending && isError) return <h1>some error wented</h1>;
+  if (!isPending && isError)
+    return (
+      <div className="flex h-32 w-full items-center justify-center">
+        <h1 className="font-VazirMedium text-[15px] text-myRed-100/80 mdC:text-lg mdC:font-medium">
+          خطایی رخ داد ، مجددا امتحان کنید !
+        </h1>
+      </div>
+    );
 
   return (
     <>
       {data?.data?.length > 0 ? (
-        data?.data.map((i) => {
-          const start = monthNomToFa(new Date(i.startDate));
-          const end = monthNomToFa(new Date(i.endDate));
-          return (
-            <div className="flex flex-col gap-y-3 md:rounded-xl md:border md:p-4">
+        <div className="flex flex-col gap-y-3 md:rounded-xl md:border md:p-4">
+          {data?.data.map((i) => {
+            const start = monthNomToFa(new Date(i.startDate));
+            const end = monthNomToFa(new Date(i.endDate));
+            return (
               <div
+                key={i.id}
                 className="relative flex flex-col gap-y-3 rounded-[10px] border p-4 xs:p-6"
-                key={`i.id${Math.random()}`}
               >
                 {new Date(i.startDate) < new Date() &&
                   new Date(i.endDate) > new Date() && (
@@ -36,7 +43,7 @@ export default function UserTours() {
                   </span>
                 )}
                 {new Date(i.startDate) > new Date() && (
-                  <span className="absolute left-4 top-4 rounded-full bg-myYellow-100/20 px-2 py-1 font-VazirRegular text-[10px] text-myYellow-100">
+                  <span className="absolute left-4 top-4 rounded-full bg-myYellow-100/10 px-2 py-1 font-VazirRegular text-[10px] text-myYellow-100">
                     در پیش رو
                   </span>
                 )}
@@ -152,9 +159,9 @@ export default function UserTours() {
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })
+            );
+          })}
+        </div>
       ) : (
         <div className="flex h-32 w-full items-center justify-center">
           <h1 className="font-VazirMedium text-[15px] text-myRed-100/80 mdC:text-lg mdC:font-medium">

@@ -69,7 +69,7 @@ export default function Header({ isLogin, setIsLogin, setIsOpen, isOpen }) {
               <div className="relative delay-150">
                 <div
                   onClick={() => setDropDown(true)}
-                  className="flex items-center gap-x-1 text-myGreen-200"
+                  className="flex items-center gap-x-1 rounded-xl p-2 text-myGreen-200 hover:cursor-pointer hover:bg-myGreen-90"
                 >
                   <div className="relative h-[14px] w-[14px] xs:h-5 xs:w-5 md:h-6 md:w-6">
                     <Image

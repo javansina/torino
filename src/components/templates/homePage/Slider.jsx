@@ -277,7 +277,7 @@ export default function Slider() {
           </div>
           <div className="absolute -bottom-10 right-[20%] flex h-[50px] w-fit items-center justify-center text-black STxsB:pr-3 STxsC:pr-5 STxsD:pr-7 STxsE:pr-11 xs:pr-12 xsB:pr-14 xsC:pr-[90px] sm:pr-[110px] smB:pr-[130px] smC:pr-[150px] md:-right-5 md:pr-0 mdB:pr-2 mdC:pr-[55px] lg:pr-[105px] lgB:pr-[155px] xl:pr-[120px]">
             <button
-              className="w-fit"
+              className="w-fit rounded-lg transition-all delay-75 hover:bg-myBlue-100/20 hover:text-myBlue-100"
               onClick={() => {
                 if (onTop[1] < 4) {
                   setOnTop((i) => [i[1], i[1] + 1]);
@@ -307,7 +307,7 @@ export default function Slider() {
             </span>
 
             <button
-              className="w-fit"
+              className="w-fit rounded-lg transition-all delay-75 hover:bg-myBlue-100/20 hover:text-myBlue-100"
               onClick={() => {
                 if (onTop[1] > 1) {
                   setOnTop((i) => [i[1], i[1] - 1]);

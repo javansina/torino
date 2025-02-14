@@ -139,14 +139,14 @@ function CheckOTPForm({
           ) : (
             <span
               onClick={sendOtpHandler}
-              className="cursor-pointer text-blue-600"
+              className="cursor-pointer text-blue-600 hover:text-myBlue-100"
             >
               ارسال مجدد کد
             </span>
           )}
         </div>
         <button
-          className="mt-[19px] h-[54px] w-full rounded-md bg-[#28A745] text-lg font-medium text-white"
+          className="mt-[19px] h-[54px] w-full rounded-md bg-[#28A745] text-lg font-medium text-white hover:bg-myGreen-200/90"
           type="submit"
         >
           ورود به تورینو

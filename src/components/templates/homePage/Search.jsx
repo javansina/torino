@@ -58,7 +58,7 @@ export default function SearchFrom() {
     }
 
     const query = queryString.stringify(flattenObject(form));
-    router.push(`/?${query}`);
+    router.push(`/?${query}`, { scroll: false });
   };
   const originCity = [
     { id: 2, origin: "سنندج" },
@@ -123,7 +123,7 @@ export default function SearchFrom() {
                   autoComplete="off"
                   readOnly
                   onFocus={() => setOriginDropDown(true)}
-                  className="w-full rounded-xl py-[14px] pr-[40%] text-start outline-none md:ml-2 md:h-14 md:w-full md:rounded-l-none md:border-l md:py-4 md:pr-12"
+                  className="w-full rounded-xl py-[14px] pr-[40%] text-start outline-none hover:cursor-pointer md:ml-2 md:h-14 md:w-full md:rounded-l-none md:border-l md:py-4 md:pr-12"
                 />
                 {originDropDown && (
                   <OutsideClickHandler
@@ -141,7 +141,7 @@ export default function SearchFrom() {
                           id="option"
                           key={item.id}
                           onClick={() => originHandler(item.id, item.origin)}
-                          className="flex w-full items-center gap-x-2 p-4 text-[14px] font-normal text-myGray-410"
+                          className="flex w-full items-center gap-x-2 p-4 text-[14px] font-normal text-myGray-410 hover:cursor-pointer hover:bg-myGreen-90"
                         >
                           <div className="relative h-5 w-5 child:text-myGray-410">
                             <Image
@@ -181,7 +181,7 @@ export default function SearchFrom() {
                   autoComplete="off"
                   readOnly
                   onFocus={() => setDestinationDropDown(true)}
-                  className="w-full rounded-xl py-[14px] pr-[40%] text-start outline-none md:ml-2 md:h-14 md:w-full md:rounded-l-none md:border-l md:py-4 md:pr-12"
+                  className="w-full rounded-xl py-[14px] pr-[40%] text-start outline-none hover:cursor-pointer md:ml-2 md:h-14 md:w-full md:rounded-l-none md:border-l md:py-4 md:pr-12"
                 />
                 {destinationDropDown && (
                   <OutsideClickHandler
@@ -200,7 +200,7 @@ export default function SearchFrom() {
                           onClick={() =>
                             destinationHandler(item.id, item.destination)
                           }
-                          className="flex w-full items-center gap-x-2 p-4 text-[14px] font-normal text-myGray-410"
+                          className="flex w-full items-center gap-x-2 p-4 text-[14px] font-normal text-myGray-410 hover:cursor-pointer hover:bg-myGreen-90"
                         >
                           <div className="relative h-5 w-5 child:text-myGray-410">
                             <Image
@@ -248,7 +248,7 @@ export default function SearchFrom() {
 
             <input
               type="submit"
-              className="min-w-full rounded-2xl bg-myGreen-200 px-14 py-4 font-VazirRegular text-[24px] font-normal leading-5 tracking-wider text-white md:min-w-fit"
+              className="min-w-full rounded-2xl bg-myGreen-200 px-14 py-4 font-VazirRegular text-[24px] font-normal leading-5 tracking-wider text-white delay-100 hover:cursor-pointer hover:bg-myGreen-200/90 md:min-w-fit"
               value="جستجو"
             />
           </form>

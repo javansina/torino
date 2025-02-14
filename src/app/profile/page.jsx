@@ -54,7 +54,7 @@ export default function UserAccountPage() {
                     >
                       <button
                         onClick={() => setIsEditingEmail(true)}
-                        className={`ml-0.5 flex items-center justify-end gap-2 font-VazirRegular text-[14px] font-thin tracking-wide text-myBlue-100 xsB:text-lg`}
+                        className={`ml-0.5 flex items-center justify-end gap-2 font-VazirRegular text-[14px] font-thin tracking-wide text-myBlue-100 hover:text-myBlue-100/80 xsB:text-lg`}
                       >
                         <Image
                           src={"/images/edit-2.svg"}
@@ -95,7 +95,7 @@ export default function UserAccountPage() {
                 </span>
                 <button
                   onClick={() => setIsEditingPersonalInfo(true)}
-                  className={`ml-0.5 flex items-center justify-end gap-2 font-VazirRegular text-[14px] font-thin tracking-wide text-myBlue-100 xsB:text-lg`}
+                  className={`ml-0.5 flex items-center justify-end gap-2 font-VazirRegular text-[14px] font-thin tracking-wide text-myBlue-100 hover:text-myBlue-100/80 xsB:text-lg`}
                 >
                   <Image
                     src={"/images/edit-2.svg"}
@@ -211,7 +211,7 @@ export default function UserAccountPage() {
                 </span>
                 <button
                   onClick={() => setIsEditingBankAccount(true)}
-                  className={`ml-0.5 flex items-center justify-end gap-2 font-VazirRegular text-[14px] font-thin tracking-wide text-myBlue-100 xsB:text-lg`}
+                  className={`ml-0.5 flex items-center justify-end gap-2 font-VazirRegular text-[14px] font-thin tracking-wide text-myBlue-100 hover:text-myBlue-100/80 xsB:text-lg`}
                 >
                   <Image
                     src={"/images/edit-2.svg"}

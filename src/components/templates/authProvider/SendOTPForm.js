@@ -86,7 +86,7 @@ function SendOTPForm({ mobile, setMobile, setStep, setIsOpen }) {
           onChange={(e) => setMobile(e.target.value)}
         />
         <button
-          className="h-[54px] w-full rounded-md bg-[#28A745] text-lg font-medium text-white"
+          className="h-[54px] w-full rounded-md bg-myGreen-200 text-lg font-medium text-white hover:bg-myGreen-200/90"
           type="submit"
         >
           ارسال کد تایید

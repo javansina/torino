@@ -251,13 +251,13 @@ export default function Form({
           <div className="flex gap-x-7 lg:justify-end">
             <button
               type="submit"
-              className="w-full rounded-lg bg-myGreen-200 py-2.5 text-center font-VazirRegular text-[18px] text-background lg:w-[140px]"
+              className="w-full rounded-lg bg-myGreen-200 py-2.5 text-center font-VazirRegular text-[18px] text-background hover:bg-myGreen-200/90 lg:w-[140px]"
             >
               تایید
             </button>
             <button
               onClick={() => setIsEditingPersonalInfo(false)}
-              className="w-full rounded-lg border-2 border-myGreen-200 bg-background py-2.5 text-center font-VazirRegular text-[18px] text-myGreen-200 lg:w-[140px]"
+              className="w-full rounded-lg border-2 border-myGreen-200 bg-background py-2.5 text-center font-VazirRegular text-[18px] text-myGreen-200 hover:bg-myGreen-200/10 lg:w-[140px]"
             >
               انصراف
             </button>
@@ -274,14 +274,14 @@ function SubmitButton({ isEmptyBasket }) {
       {isEmptyBasket ? (
         <Link
           href={"/"}
-          className="w-full rounded-[10px] bg-myRed-100/60 py-3 text-center font-VazirMedium tracking-wider text-background"
+          className="w-full rounded-[10px] bg-myRed-100/60 py-3 text-center font-VazirMedium tracking-wider text-background hover:cursor-pointer hover:bg-myRed-100/50"
         >
           بازگشت به صفحه اصلی
         </Link>
       ) : (
         <button
           type="submit"
-          className="w-full rounded-[10px] bg-myGreen-200 py-3 font-VazirMedium tracking-wide text-background"
+          className="w-full rounded-[10px] bg-myGreen-200 py-3 font-VazirMedium tracking-wide text-background hover:bg-myGreen-200/90"
         >
           ثبت و خرید نهایی
         </button>

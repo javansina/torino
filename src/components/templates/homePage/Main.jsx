@@ -42,7 +42,7 @@ export default function Main() {
                 />
               </div>
             </div>
-            <button className="prevent-select rounded-[9px] bg-myGreen-300 px-7 py-2 text-background lg:px-[41px]">
+            <button className="prevent-select rounded-[9px] bg-myGreen-300 px-7 py-2 text-background hover:bg-myGreen-300/90 lg:px-[41px]">
               اطلاعات بیشتر
             </button>
           </div>

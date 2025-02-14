@@ -118,13 +118,13 @@ export default function BankAccountForm({
         <div className="flex gap-x-7 lg:justify-end">
           <button
             type="submit"
-            className="w-full rounded-lg bg-myGreen-200 py-2.5 text-center font-VazirRegular text-[18px] text-background lg:w-[140px]"
+            className="w-full rounded-lg bg-myGreen-200 py-2.5 text-center font-VazirRegular text-[18px] text-background hover:bg-myGreen-200/90 lg:w-[140px]"
           >
             تایید
           </button>
           <button
             onClick={() => setIsEditingBankAccount(false)}
-            className="w-full rounded-lg border-2 border-myGreen-200 bg-background py-2.5 text-center font-VazirRegular text-[18px] text-myGreen-200 lg:w-[140px]"
+            className="w-full rounded-lg border-2 border-myGreen-200 bg-background py-2.5 text-center font-VazirRegular text-[18px] text-myGreen-200 hover:bg-myGreen-200/10 lg:w-[140px]"
           >
             انصراف
           </button>

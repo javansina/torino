@@ -75,7 +75,7 @@ export default function Card({ item }) {
         <div className="flex items-center justify-between border-t">
           <Link
             href={`/tour-details/${item.id}`}
-            className="mt-[6px] rounded-[5px] bg-myGreen-200 px-[38px] pb-[8px] pt-[4px] text-background"
+            className="mt-[6px] rounded-[5px] bg-myGreen-200 px-[38px] pb-[8px] pt-[4px] text-background hover:bg-myGreen-200/90"
           >
             رزرو
           </Link>

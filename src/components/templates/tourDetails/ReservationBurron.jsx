@@ -38,7 +38,7 @@ export default function ReservationButton({ id, tourExpired, pricee }) {
     <>
       <div
         onClick={reservationHandler}
-        className={`${tourExpired < 0 ? "cursor-not-allowed bg-myGray-130" : "bg-myGreen-200"} h-fit w-fit rounded-[10px] px-[30px] py-1 font-VazirDigitRegular text-[20px] text-background xs:py-2 lg:px-[45px] lg:text-[24px]`}
+        className={`${tourExpired < 0 ? "cursor-not-allowed bg-myGray-130" : "cursor-pointer bg-myGreen-200 hover:bg-myGreen-200/90"} h-fit w-fit rounded-[10px] px-[30px] py-1 font-VazirDigitRegular text-[20px] text-background xs:py-2 lg:px-[45px] lg:text-[24px]`}
       >
         رزرو و خرید
       </div>

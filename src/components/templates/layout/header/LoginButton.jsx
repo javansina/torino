@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function LoginButton({ setIsOpen }) {
   return (
     <button onClick={() => setIsOpen(true)}>
-      <div className="hidden items-center gap-x-1 rounded-[9px] border-[2px] border-myGreen-200 py-[2px] pl-[10px] pr-[6px] md:flex lg:gap-x-1.5 lg:py-[4px] lg:pl-[15px] lg:pr-[10px]">
+      <div className="hidden items-center gap-x-1 rounded-[9px] border-[2px] border-myGreen-200 py-[2px] pl-[10px] pr-[6px] hover:bg-myGreen-90 md:flex lg:gap-x-1.5 lg:py-[4px] lg:pl-[15px] lg:pr-[10px]">
         <div className="relative h-5 w-5 lg:h-6 lg:w-6">
           <Image fill={true} src={"/images/profile.svg"} alt={"profile"} />
         </div>

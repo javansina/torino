@@ -34,7 +34,9 @@ export default function NavBarM({ sideNav }) {
         <li
           key={item.img}
           className={`${
-            pathname === item.href ? "text-myGreen-200" : "text-myGray-410"
+            pathname === item.href
+              ? "text-myGreen-200 hover:text-myGreen-200/80"
+              : "text-myGray-410 hover:text-myGray-410/70"
           }`}
         >
           <Link className="flex items-center gap-x-2" href={item.href}>
