@@ -5,7 +5,7 @@ import LoginButton from "./LoginButton";
 import NavBarM from "./NavBar";
 import { useEffect, useState } from "react";
 
-import { setCookie } from "@/core/utils/cookie";
+import { getOtherAccountsCookies, setCookie } from "@/core/utils/cookie";
 
 import ModalContainer from "@/components/partials/container/ModalContainer";
 import SendOTPForm from "../../authProvider/SendOTPForm";
@@ -15,6 +15,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useGetUserProfile } from "@/core/services/queries";
 import OutsideClickHandler from "@/core/utils/helper/OutsideClickHandler";
 import Link from "next/link";
+import OtherAccounts from "./OtherAccounts";
 
 export default function Header({ isLogin, setIsLogin, setIsOpen, isOpen }) {
   const queryClient = useQueryClient();
@@ -24,13 +25,13 @@ export default function Header({ isLogin, setIsLogin, setIsOpen, isOpen }) {
   const [mobile, setMobile] = useState("");
   const [isExpired, setIsExpired] = useState(false);
   const [isClient, setIsIsClient] = useState(false);
+  const [sideNav, setSideNav] = useState(false);
+  const [dropDown, setDropDown] = useState(false);
+  const [isOtherAccountNumber, setIsOtherAccountNumber] = useState(false);
 
   useEffect(() => {
     setIsIsClient(true);
   }, []);
-
-  const [sideNav, setSideNav] = useState(false);
-  const [dropDown, setDropDown] = useState(false);
 
   const logOutHandler = () => {
     setCookie("accessToken", "", 0);
@@ -39,8 +40,16 @@ export default function Header({ isLogin, setIsLogin, setIsOpen, isOpen }) {
     setIsLogin(false);
   };
   const handleOutsideClick = () => {
+    setIsOtherAccountNumber(false);
     setDropDown(false);
   };
+  // const a = async () => {
+  //   const moz = getOtherAccountsCookies("otherAcountsToken");
+  //   const m = await JSON.parse(moz);
+  //   // ; refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFkY2YyMDg2LWI2ODktNDZmOS1iNWRjLTdkYmFmY2VkODFlMyIsIm1vYmlsZSI6IjA5ODk4OTg5ODk4IiwiaWF0IjoxNzQwMDA4NTI1LCJleHAiOjE3NDA2MTMzMjV9.q7NnprzOQfPKlqofn5BanY3AwHi_WmmZyGtNWdccUv8; accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFkY2YyMDg2LWI2ODktNDZmOS1iNWRjLTdkYmFmY2VkODFlMyIsIm1vYmlsZSI6IjA5ODk4OTg5ODk4IiwiaWF0IjoxNzQwMTA5NDAyLCJleHAiOjE3NDAxMTMwMDJ9.pjXmmgZzu5un2bZ1xfQuNXwkCnKm1WHY8567r7iSsxE
+  //   console.log(m);
+  // };
+  // a();
 
   return (
     <>
@@ -96,23 +105,55 @@ export default function Header({ isLogin, setIsLogin, setIsOpen, isOpen }) {
 
                 <OutsideClickHandler onOutsideClick={handleOutsideClick}>
                   <div
-                    className={`header-top-shadow down ${dropDown ? "profile-down-active" : "profile-down-hidden"} absolute -left-[10%] top-8 w-[167px] divide-y rounded-2xl bg-background transition-all delay-75 child:transition-colors xs:top-10 xs:w-[200px] md:top-10 mdC:top-10 lg:-left-[20%] lg:w-[246px]`}
+                    className={`header-top-shadow down ${dropDown ? "profile-down-active" : "profile-down-hidden"} absolute -left-[5%] top-8 w-[167px] divide-y rounded-2xl bg-background transition-all delay-75 child:transition-colors xs:top-10 xs:w-[200px] md:top-10 mdC:top-10 lg:-left-[20%] lg:w-[246px]`}
                   >
-                    <div className="flex h-11 items-center gap-x-3 rounded-t-[11px] bg-myGray-105/80 px-3">
-                      <div className="relative h-4 w-4 rounded-full bg-myGray-140 p-2 md:p-3">
-                        <Image
-                          fill={true}
-                          src="/images/frame.svg"
-                          alt="profile"
-                        />
+                    <div
+                      onClick={() => setIsOtherAccountNumber((i) => !i)}
+                      className="flex h-11 items-center justify-between gap-x-3 rounded-t-[11px] bg-myGray-105/80 px-3 hover:cursor-pointer"
+                    >
+                      <div className="flex gap-x-3">
+                        <div className="w-fit rounded-full bg-myGray-140 p-0.5 md:p-1">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            className="h-4 w-4"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span className="w-fit font-VazirDigit text-[14px] font-medium text-myGreen-300 md:text-[16px] lg:text-[18px]">
+                          {!!data?.data?.fullName
+                            ? `${data.data.fullName}`
+                            : data?.data?.mobile}
+                        </span>
                       </div>
-                      <span className="w-fit font-VazirDigit text-[14px] font-medium text-myGreen-300 md:text-[16px] lg:text-[18px]">
-                        {!!data?.data?.fullName
-                          ? `${data.data.fullName}`
-                          : data?.data?.mobile}
-                      </span>
+                      <div
+                        className={`down ${!isOtherAccountNumber && "arrow-down"} text-black/50`}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="size-5"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
                     </div>
-
+                    <OtherAccounts
+                      setIsOtherAccountNumber={setIsOtherAccountNumber}
+                      isOtherAccountNumber={isOtherAccountNumber}
+                      setIsOpen={setIsOpen}
+                    />
                     <Link
                       href={"/profile"}
                       onClick={() => setDropDown(false)}
@@ -129,7 +170,6 @@ export default function Header({ isLogin, setIsLogin, setIsOpen, isOpen }) {
                         اطلاعات حساب کاربری
                       </span>
                     </Link>
-
                     <div className="flex h-[35px] items-center gap-x-2 rounded-b-[15px] pb-1.5 pr-3 hover:bg-myGray-110 lg:h-[45px]">
                       <div className="relative mt-1 h-4 w-4 md:h-5 md:w-5">
                         <Image
@@ -198,6 +238,7 @@ export default function Header({ isLogin, setIsLogin, setIsOpen, isOpen }) {
             isExpired={isExpired}
             setIsExpired={setIsExpired}
             setIsLogin={setIsLogin}
+            isLogin={isLogin}
           />
         </ModalContainer>
       )}

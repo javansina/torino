@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { email } from "@/core/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { usePutUserData } from "@/core/services/mutations";
+import toast from "react-hot-toast";
 
 export default function UserAccountForm({ data, setIsEditingEmail }) {
   const [userEmail, setUserEmail] = useState("");
@@ -33,12 +34,14 @@ export default function UserAccountForm({ data, setIsEditingEmail }) {
       mutate(
         { ...form },
         {
-          onSuccess: () => toast.success("تغییرات با موفقیت ذخیره شد!"),
+          onSuccess: () => {
+            toast.success("تغییرات با موفقیت ذخیره شد!");
+            setIsEditingEmail(false);
+          },
           onError: (err) => toast.error(err.message),
         },
       );
     }
-    setIsEditingEmail(false);
   };
   return (
     <form

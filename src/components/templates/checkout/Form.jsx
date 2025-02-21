@@ -68,21 +68,25 @@ export default function Form({
         { ...form },
         {
           onError: (err) => toast.error(err.message),
-          onSuccess: () => toast.success("تور با موفقیت خریداری شد!"),
+          onSuccess: () => {
+            toast.success("تور با موفقیت خریداری شد!");
+            router.replace("/profile/tours");
+          },
         },
       );
-      router.replace("/profile/tours");
     }
 
     if (isProfile) {
       userProfileMutation(
         { ...form },
         {
-          onSuccess: () => toast.success("تغییرات با موفقیت ذخیره شد!"),
+          onSuccess: () => {
+            toast.success("تغییرات با موفقیت ذخیره شد!");
+            setIsEditingPersonalInfo(false);
+          },
           onError: (err) => toast.error(err.message),
         },
       );
-      setIsEditingPersonalInfo(false);
     }
   };
 

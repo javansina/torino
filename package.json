@@ -13,6 +13,7 @@
     "@tanstack/react-query": "^5.62.3",
     "@tanstack/react-query-devtools": "^5.62.8",
     "axios": "^1.7.9",
+    "jsonwebtoken": "^9.0.2",
     "next": "14.2.20",
     "query-string": "^9.1.1",
     "react": "^18",

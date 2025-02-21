@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 export default function OutsideClickHandler({
   children,
   onOutsideClick,
-  className,
+  className = "",
 }) {
   const ref = useRef();
 

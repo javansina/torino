@@ -8,8 +8,8 @@ import CountdownTimer from "./CountdownTimer";
 
 import toast from "react-hot-toast";
 import { useSendOtp } from "@/core/services/mutations";
-
 import { usePathname, useRouter } from "next/navigation";
+import { loginNewAcount } from "@/core/services/http";
 
 function CheckOTPForm({
   mobile,
@@ -18,6 +18,7 @@ function CheckOTPForm({
   isExpired,
   setIsExpired,
   setIsLogin,
+  isLogin,
 }) {
   const [code, setCode] = useState("");
   const [isClient, setIsClient] = useState(false);
@@ -27,28 +28,35 @@ function CheckOTPForm({
     setIsClient(true);
   }, []);
 
-  const { isPending, mutate } = useCheckOtp();
+  const { mutate } = useCheckOtp();
   const path = usePathname();
 
   const checkOtpHandler = (event) => {
     event.preventDefault();
 
-    if (isPending) return;
-
-    mutate(
-      { mobile, code },
-      {
-        onSuccess: () => {
+    if (isLogin) {
+      loginNewAcount({ mobile, code })
+        .then(() => {
           setIsOpen(false);
           setStep(1);
-          setIsLogin(true);
-          toast.success("ورود موفق !");
+        })
+        .catch((err) => toast.error(err.message));
+    } else {
+      mutate(
+        { mobile, code },
+        {
+          onSuccess: () => {
+            setIsOpen(false);
+            setStep(1);
+            setIsLogin(true);
+            toast.success("ورود موفق !");
+          },
+          onError: (error) => {
+            console.log(error);
+          },
         },
-        onError: (error) => {
-          console.log(error);
-        },
-      },
-    );
+      );
+    }
   };
 
   const { isPending: tryAgain, mutate: tryAgainMutate } = useSendOtp();
